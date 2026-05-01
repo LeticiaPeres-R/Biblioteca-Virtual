@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos/style-cadastro-login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <title>Document</title>
+    <script src="./js/sessao.js"></script>
+</head>
+
+<body>
+    <div class="container-tela-inteira">
+        <div class="container-moldura">
+            <div class="container-tela-imagem">
+                <div class="container-imagem">
+                    <img src="../img/fundo-login.png" alt="" class="imagem-tela-login">
+                    <div class="container-moldura-imagem">
+                        <div class="btn-voltar-home">
+                            <img src="" alt="">
+                            <a href="./index.html">Voltar para Home</a>
+                        </div>
+                        <div class="texto-login-img">
+                            <h1>Bem Vindos</h1>
+                            <h3>ao seu espaço de histórias</h3>
+                        </div>
+                        <div class="img-flor">
+                            <img src="./img/icon-flor-login.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-tela-formulario">
+                <div class="container-formulario">
+                    <div class="mensagem-invalida" id="mensagem_invalida">
+
+                    </div>
+                    <div class="linha-login">
+                        <img src="../img/icon-linha-2.png" alt="">
+                    </div>
+                    <div class="img-borboleta">
+                        <img src="../img/borboleta.png" alt="">
+                    </div>
+                    <div class="texto-login">
+                        <span>Entre</span>
+                        <p>Acesse sua conta</p>
+                        <p>e continue sua jornada de leitura</p>
+                    </div>
+                    <div class="container-inputs">
+                        <div class="texto-input">
+                            <p>E-mail:</p>
+                        </div>
+                        <div class="inptus">
+                            <div class="img-input">
+                            </div>
+                            <input type="text" placeholder="seu@email.com" id="id_email">
+                        </div>
+                        <div class="texto-input">
+                            <p>Senha:</p>
+                        </div>
+                        <div class="inptus">
+                            <div class="img-input">
+                            </div>
+                            <input type="password" placeholder="Sua senha" id="id_senha">
+                        </div>
+                    </div>
+                    <div id="id_mensagem" class="mensagem"></div>
+                    <div class="btn-entrar">
+                        <button onclick="Entrar()">
+                            <img src="../img/icon-pin4.png" alt="">
+                            Entrar</button>
+                    </div>
+                    <div class="container-btn-criar-conta">
+                        <div class="ou">
+                            <img src="../img/icon-flecha-direita.png" alt="">
+                            <p>ou</p>
+                            <img src="../img/icon-flecha-esquerda.png" alt="">
+                        </div>
+                        <div class="btn-criar-conta">
+                            <a href="./cadastro.html">
+                                <img src="../img/icon-flor-cadastro.png" alt="">
+                                Criar conta</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flor-de-baixo">
+                    <img src="../img/icon-flor-1.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function Entrar() {
+
+            let email = id_email.value
+            let senha = id_senha.value
+            if (email == '' || senha == '') {
+                // mensagem de erro
+                return false
+            }
+            else {
+                // setInterval(sumirMensagem, 5000)
+            }
+            console.log("Form login:", email)
+            console.log("Form senha:", senha)
+            fetch("/usuarios/autenticar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+
+                    emailServer: email,
+                    senhaServer: senha
+                })
+            }).then(function (resposta) {
+                console.log('Estou  no then do entrar()')
+                if (resposta.ok) {
+                    console.log(resposta)
+                    resposta.json().then(json => {
+                        console.log(json)
+                        console.log(JSON.stringify(json))
+                        sessionStorage.EMAIL_USUARIO = json.email
+                        sessionStorage.NOME_USUARIO = json.nome
+                        sessionStorage.ID_USUARIO = json.id
+                        setTimeout(function () {
+                            window.location = "./biblioteca.html"
+                        }, 1000)
+                    })
+                } else {
+                    console.log("Houve um erro ao tentar realizar o login")
+                    // resposta.text().then(texto =>{
+                    //     console.error(texto)
+                        // finalizarAguardar()
+                    // })
+                }
+            }).catch(function(erro){
+                console.log(erro)
+            })
+            return false
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,381 @@
+<!-- ============================================================ -->
+<!-- ARQUIVO COMENTADO: public/cadastro.html -->
+<!-- Comentários adicionados para explicar a função das tags e scripts. -->
+<!-- ============================================================ -->
+<!-- Informa ao navegador que este documento usa HTML5. -->
+<!DOCTYPE html>
+<!-- Tag raiz da página. Todo o conteúdo HTML fica dentro dela. -->
+<html lang="pt-br">
+
+<!-- Área de configurações da página, como título, links de CSS e metadados. -->
+<head>
+<!-- Define informações da página, como acentuação, responsividade ou compatibilidade. -->
+  <meta charset="UTF-8" />
+<!-- Define informações da página, como acentuação, responsividade ou compatibilidade. -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<!-- Define informações da página, como acentuação, responsividade ou compatibilidade. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- Define o título que aparece na aba do navegador. -->
+  <title>AquaTech | Cadastro</title>
+
+<!-- Carrega ou inicia código JavaScript na página. -->
+  <script src="./js/sessao.js"></script>
+
+<!-- Conecta um arquivo externo, como CSS, ícone ou fonte. -->
+  <link rel="stylesheet" href="./css/estilo.css" />
+<!-- Conecta um arquivo externo, como CSS, ícone ou fonte. -->
+  <link rel="icon" href="./assets/icon/favicon2.ico" />
+<!-- Conecta um arquivo externo, como CSS, ícone ou fonte. -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+<!-- Fecha uma tag aberta anteriormente. -->
+</head>
+
+<!-- Área visível da página, onde ficam os elementos que aparecem para o usuário. -->
+<body onload="listar()">
+  <!--header inicio-->
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+  <div class="header">
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+    <div class="container">
+<!-- Cria um título. Quanto menor o número, maior a importância visual/semântica. -->
+      <h1 class="titulo">AquaTech</h1>
+<!-- Elemento ou conteúdo da página HTML. -->
+      <ul class="navbar">
+<!-- Elemento ou conteúdo da página HTML. -->
+        <li>
+<!-- Cria um link para navegar para outra página ou área. -->
+          <a href="index.html">Inicial</a>
+<!-- Fecha uma tag aberta anteriormente. -->
+        </li>
+<!-- Elemento ou conteúdo da página HTML. -->
+        <li>
+<!-- Cria um link para navegar para outra página ou área. -->
+          <a href="simulador.html">Simulador</a>
+<!-- Fecha uma tag aberta anteriormente. -->
+        </li>
+<!-- Elemento ou conteúdo da página HTML. -->
+        <li>|</li>
+<!-- Elemento ou conteúdo da página HTML. -->
+        <li>
+<!-- Cria um link para navegar para outra página ou área. -->
+          <a href="login.html">Login</a>
+<!-- Fecha uma tag aberta anteriormente. -->
+        </li>
+<!-- Elemento ou conteúdo da página HTML. -->
+        <li class="agora">
+<!-- Cria um link para navegar para outra página ou área. -->
+          <a href="#">Cadastro</a>
+<!-- Fecha uma tag aberta anteriormente. -->
+        </li>
+<!-- Fecha uma tag aberta anteriormente. -->
+      </ul>
+<!-- Fecha uma tag aberta anteriormente. -->
+    </div>
+<!-- Fecha uma tag aberta anteriormente. -->
+  </div>
+  <!--header fim-->
+
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+  <div class="login">
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+    <div class="alerta_erro">
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+      <div class="card_erro" id="cardErro">
+<!-- Cria um trecho inline para aplicar estilo ou manipular uma parte pequena do texto. -->
+        <span id="mensagem_erro"></span>
+<!-- Fecha uma tag aberta anteriormente. -->
+      </div>
+<!-- Fecha uma tag aberta anteriormente. -->
+    </div>
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+    <div class="container">
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+      <div class="card card-cadastro">
+<!-- Cria um título. Quanto menor o número, maior a importância visual/semântica. -->
+        <h2>Bem-vindo!</h2>
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+        <div class="formulario">
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+          <div class="campo">
+<!-- Cria um trecho inline para aplicar estilo ou manipular uma parte pequena do texto. -->
+            <span>Código de ativação:</span>
+<!-- Cria um campo para o usuário digitar ou selecionar informações. -->
+            <input id="codigo_input" type="text" placeholder="Insira aqui seu código" />
+<!-- Fecha uma tag aberta anteriormente. -->
+          </div>
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+          <div class="campo">
+<!-- Cria um trecho inline para aplicar estilo ou manipular uma parte pequena do texto. -->
+            <span>Nome:</span>
+<!-- Cria um campo para o usuário digitar ou selecionar informações. -->
+            <input id="nome_input" type="text" placeholder="Seu nome" />
+<!-- Fecha uma tag aberta anteriormente. -->
+          </div>
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+          <div class="campo">
+<!-- Cria um trecho inline para aplicar estilo ou manipular uma parte pequena do texto. -->
+            <span>E-mail:</span>
+<!-- Cria um campo para o usuário digitar ou selecionar informações. -->
+            <input id="email_input" type="text" placeholder="meuemail@provedor.com" />
+<!-- Fecha uma tag aberta anteriormente. -->
+          </div>
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+          <div class="campo">
+<!-- Cria um trecho inline para aplicar estilo ou manipular uma parte pequena do texto. -->
+            <span>Senha:</span>
+<!-- Cria um campo para o usuário digitar ou selecionar informações. -->
+            <input id="senha_input" type="password" placeholder="******" />
+<!-- Fecha uma tag aberta anteriormente. -->
+          </div>
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+          <div class="campo">
+<!-- Cria um trecho inline para aplicar estilo ou manipular uma parte pequena do texto. -->
+            <span>Confirmação da Senha:</span>
+<!-- Cria um campo para o usuário digitar ou selecionar informações. -->
+            <input id="confirmacao_senha_input" type="password" placeholder="******" />
+<!-- Fecha uma tag aberta anteriormente. -->
+          </div>
+<!-- Cria um botão clicável. -->
+          <button class="botao" onclick="cadastrar()">Cadastrar</button>
+<!-- Fecha uma tag aberta anteriormente. -->
+        </div>
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+        <div id="div_aguardar" class="loading-div">
+<!-- Mostra uma imagem na página. -->
+          <img src="./assets/circle-loading.gif" id="loading-gif" />
+<!-- Fecha uma tag aberta anteriormente. -->
+        </div>
+
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+        <div id="div_erros_login"></div>
+<!-- Fecha uma tag aberta anteriormente. -->
+      </div>
+<!-- Fecha uma tag aberta anteriormente. -->
+    </div>
+<!-- Fecha uma tag aberta anteriormente. -->
+  </div>
+
+  <!--footer inicio-->
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+  <div class="footer">
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+    <div class="container">
+<!-- Cria um título. Quanto menor o número, maior a importância visual/semântica. -->
+      <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
+<!-- Cria um trecho inline para aplicar estilo ou manipular uma parte pequena do texto. -->
+      <span class="version">v1.0.0</span>
+<!-- Fecha uma tag aberta anteriormente. -->
+    </div>
+<!-- Fecha uma tag aberta anteriormente. -->
+  </div>
+  <!--footer fim-->
+<!-- Fecha uma tag aberta anteriormente. -->
+</body>
+
+<!-- Fecha uma tag aberta anteriormente. -->
+</html>
+
+<!-- Carrega ou inicia código JavaScript na página. -->
+<script>
+
+  // Array para armazenar empresas cadastradas para validação de código de ativação 
+// Define ou altera um valor usado pelo programa.
+  let listaEmpresasCadastradas = [];
+
+// Cria uma função. Essa função agrupa comandos para serem executados quando for chamada.
+  function cadastrar() {
+    // aguardar();
+
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+// Define ou altera um valor usado pelo programa.
+    var nomeVar = nome_input.value;
+// Define ou altera um valor usado pelo programa.
+    var emailVar = email_input.value;
+// Define ou altera um valor usado pelo programa.
+    var senhaVar = senha_input.value;
+// Define ou altera um valor usado pelo programa.
+    var confirmacaoSenhaVar = confirmacao_senha_input.value;
+// Define ou altera um valor usado pelo programa.
+    var codigoVar = codigo_input.value;
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+    var idEmpresaVincular
+
+    // Verificando se há algum campo em branco
+// Inicia uma condição. O código dentro do bloco só executa se a condição for verdadeira.
+    if (
+// Define ou altera um valor usado pelo programa.
+      nomeVar == "" ||
+// Define ou altera um valor usado pelo programa.
+      emailVar == "" ||
+// Define ou altera um valor usado pelo programa.
+      senhaVar == "" ||
+// Define ou altera um valor usado pelo programa.
+      confirmacaoSenhaVar == "" ||
+// Define ou altera um valor usado pelo programa.
+      codigoVar == ""
+// Abre um bloco de código. Tudo dentro dele pertence a essa estrutura.
+    ) {
+// Define ou altera um valor usado pelo programa.
+      cardErro.style.display = "block";
+// Define ou altera um valor usado pelo programa.
+      mensagem_erro.innerHTML =
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+        "(Mensagem de erro para todos os campos em branco)";
+
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+      finalizarAguardar();
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+      return false;
+// Executa este bloco quando as condições anteriores não foram atendidas.
+    } else {
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+      setInterval(sumirMensagem, 5000);
+// Fecha o bloco de código iniciado anteriormente.
+    }
+
+    // Verificando se o código de ativação é de alguma empresa cadastrada
+// Abre um bloco de código. Tudo dentro dele pertence a essa estrutura.
+    for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
+// Inicia uma condição. O código dentro do bloco só executa se a condição for verdadeira.
+      if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
+// Define ou altera um valor usado pelo programa.
+        idEmpresaVincular = listaEmpresasCadastradas[i].id
+// Mostra uma mensagem no terminal ou no console para ajudar a testar e depurar.
+        console.log("Código de ativação válido.");
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+        break;
+// Executa este bloco quando as condições anteriores não foram atendidas.
+      } else {
+// Define ou altera um valor usado pelo programa.
+        cardErro.style.display = "block";
+// Define ou altera um valor usado pelo programa.
+        mensagem_erro.innerHTML = "(Mensagem de erro para código inválido)";
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+        finalizarAguardar();
+// Fecha o bloco de código iniciado anteriormente.
+      }
+// Fecha o bloco de código iniciado anteriormente.
+    }
+
+    // Enviando o valor da nova input
+// Faz uma requisição HTTP do front-end para uma rota/API.
+    fetch("/usuarios/cadastrar", {
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+      method: "POST",
+// Abre um bloco de código. Tudo dentro dele pertence a essa estrutura.
+      headers: {
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+        "Content-Type": "application/json",
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+      },
+// Abre um bloco de código. Tudo dentro dele pertence a essa estrutura.
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+        nomeServer: nomeVar,
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+        emailServer: emailVar,
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+        senhaServer: senhaVar,
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+        idEmpresaVincularServer: idEmpresaVincular
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+      }),
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+    })
+// Executa este trecho quando a operação assíncrona deu certo.
+      .then(function (resposta) {
+// Mostra uma mensagem no terminal ou no console para ajudar a testar e depurar.
+        console.log("resposta: ", resposta);
+
+// Inicia uma condição. O código dentro do bloco só executa se a condição for verdadeira.
+        if (resposta.ok) {
+// Define ou altera um valor usado pelo programa.
+          cardErro.style.display = "block";
+
+// Define ou altera um valor usado pelo programa.
+          mensagem_erro.innerHTML =
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+// Abre um bloco de código. Tudo dentro dele pertence a essa estrutura.
+          setTimeout(() => {
+// Define ou altera um valor usado pelo programa.
+            window.location = "login.html";
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+          }, "2000");
+
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+          limparFormulario();
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+          finalizarAguardar();
+// Executa este bloco quando as condições anteriores não foram atendidas.
+        } else {
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+          throw "Houve um erro ao tentar realizar o cadastro!";
+// Fecha o bloco de código iniciado anteriormente.
+        }
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+      })
+// Executa este trecho quando aconteceu algum erro na operação assíncrona.
+      .catch(function (resposta) {
+// Mostra uma mensagem no terminal ou no console para ajudar a testar e depurar.
+        console.log(`#ERRO: ${resposta}`);
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+        finalizarAguardar();
+// Fecha o bloco de código iniciado anteriormente.
+      });
+
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+    return false;
+// Fecha o bloco de código iniciado anteriormente.
+  }
+
+  // Listando empresas cadastradas 
+// Cria uma função. Essa função agrupa comandos para serem executados quando for chamada.
+  function listar() {
+// Faz uma requisição HTTP do front-end para uma rota/API.
+    fetch("/empresas/listar", {
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+      method: "GET",
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+    })
+// Executa este trecho quando a operação assíncrona deu certo.
+      .then(function (resposta) {
+// Abre um bloco de código. Tudo dentro dele pertence a essa estrutura.
+        resposta.json().then((empresas) => {
+// Abre um bloco de código. Tudo dentro dele pertence a essa estrutura.
+          empresas.forEach((empresa) => {
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+            listaEmpresasCadastradas.push(empresa);
+
+// Mostra uma mensagem no terminal ou no console para ajudar a testar e depurar.
+            console.log("listaEmpresasCadastradas")
+// Mostra uma mensagem no terminal ou no console para ajudar a testar e depurar.
+            console.log(listaEmpresasCadastradas[0].codigo_ativacao)
+// Fecha o bloco de código iniciado anteriormente.
+          });
+// Fecha o bloco de código iniciado anteriormente.
+        });
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+      })
+// Executa este trecho quando aconteceu algum erro na operação assíncrona.
+      .catch(function (resposta) {
+// Mostra uma mensagem no terminal ou no console para ajudar a testar e depurar.
+        console.log(`#ERRO: ${resposta}`);
+// Fecha o bloco de código iniciado anteriormente.
+      });
+// Fecha o bloco de código iniciado anteriormente.
+  }
+
+// Cria uma função. Essa função agrupa comandos para serem executados quando for chamada.
+  function sumirMensagem() {
+// Define ou altera um valor usado pelo programa.
+    cardErro.style.display = "none";
+// Fecha o bloco de código iniciado anteriormente.
+  }
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+</script>

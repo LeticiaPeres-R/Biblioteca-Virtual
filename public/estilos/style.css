@@ -79,25 +79,25 @@
         display: flex;
         gap: 20px;
         align-items: center;
-
         justify-self: end;
 
-        a,
-        p {
-            color: #CE8787;
-            font-size: 1rem;
-            font-family: 'Libre Baskerville', serif;
-        }
-
-        .elemento-nav-4 {
+        .botoes_deslogado {
             display: flex;
             align-items: center;
+            gap: 20px;
+
+            a {
+                color: #CE8787;
+                font-size: 1rem;
+                font-family: 'Libre Baskerville', serif;
+            }
 
             .botao-criar {
                 width: 200px;
                 height: 40px;
                 background-color: #DFA6A6;
                 border-radius: 50px;
+                border: none;
 
                 display: flex;
                 align-items: center;
@@ -109,11 +109,37 @@
                 font-family: 'Libre Baskerville', serif;
 
                 box-shadow: 0px 4px 10px #2f2f2f55;
+                cursor: pointer;
 
                 img {
                     width: 30px;
                 }
             }
+        }
+    }
+
+    .btn-sair {
+        width: 200px;
+        height: 40px;
+        background-color: #DFA6A6;
+        border-radius: 50px;
+        border: none;
+        padding-left: 20px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+
+        color: white;
+        font-size: 1rem;
+        font-family: 'Libre Baskerville', serif;
+
+        box-shadow: 0px 4px 10px #2f2f2f55;
+        cursor: pointer;
+
+        img {
+            width: 30px;
         }
     }
 }

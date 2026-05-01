@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Biblioteca</title>
+</head>
+
+<body onload="listarLivros()">
+
+    <h1>Biblioteca</h1>
+    <div id="container_livros"></div>
+
+    <script>
+        function listarLivros() {
+            fetch("http://localhost:3333/livros/listar"
+            ).then(function (resposta) {
+                return resposta.json()
+            }).then(function (livros) {
+                let container = '';
+
+                for (let i = 0; i < livros.length; i++) {
+                    let livro = livros[i];
+                    container += `
+                        <div class="card-livro">
+                            <h3>${livro.titulo}</h3>
+                            <p>${livro.autor}</p>
+
+                            <img 
+                                id="coracao${livro.idLivro}"
+                                src="../img/icon-coracao-vazio.png"
+                                onclick="favoritar(${livro.idLivro})"
+                                width="100"
+                            >
+                        </div>`
+                }
+
+                container_livros.innerHTML = container
+            })
+
+        }
+
+
+        function favoritar(idLivro) {
+            let idUsuario = sessionStorage.ID_USUARIO
+
+            if (idUsuario == undefined || idUsuario == null) {
+                alert("Você precisa estar logado para favoritar um livro.");
+                window.location = "login.html";
+                return;
+            }
+
+            fetch("http://localhost:3333/favoritos/favoritar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    fkUsuario: idUsuario,
+                    fkLivro: idLivro
+                })
+            }).then(function (resposta) {
+                if (resposta.ok) {
+                    alert('Livro Favoritado!!!!')
+                    document.getElementById("coracao" + idLivro).src =
+                        "../img/icon-coracao-cheio.png";
+                }
+                else {
+                    alert("Esse livro já está nos seus favoritos.");
+                }
+            })
+
+        }
+    </script>
+
+</body>
+
+</html>

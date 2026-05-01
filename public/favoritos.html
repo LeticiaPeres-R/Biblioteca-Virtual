@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Favoritos</title>
+</head>
+
+<body onload="listarFavoritos()">
+
+    <h1>Meus Favoritos</h1>
+
+    <!-- Mensagem para usuário não logado -->
+    <div id="aviso_login" style="display: none;">
+        <p>
+            Aqui você pode ver seus livros favoritos 💛<br>
+            Você precisa estar logado para acessar essa funcionalidade.
+        </p>
+    </div>
+
+    <div id="container_favoritos"></div>
+
+</body>
+
+<script>
+
+    function listarFavoritos() {
+
+        var idUsuario = sessionStorage.ID_USUARIO;
+
+        var container = document.getElementById("container_favoritos");
+        var aviso = document.getElementById("aviso_login");
+
+        container.innerHTML = "";
+
+        // 🔴 NÃO LOGADO → mostra aviso e para aqui
+        if (idUsuario == undefined || idUsuario == null) {
+            aviso.style.display = "block";
+            return;
+        }
+
+        // 🟢 LOGADO → esconde aviso
+        aviso.style.display = "none";
+
+        fetch(`http://localhost:3333/favoritos/listar/${idUsuario}`)
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then(function (livros) {
+
+                if (livros.length == 0) {
+                    container.innerHTML = "<p>Você ainda não tem favoritos.</p>";
+                }
+
+                for (var i = 0; i < livros.length; i++) {
+                    var livro = livros[i];
+
+                    container.innerHTML += `
+                        <div class="card-favorito">
+                            
+                            <h3>${livro.titulo}</h3>
+                            <p>${livro.autor}</p>
+
+                            <button onclick="desfavoritar(${livro.idLivro})">
+                                ❌ Remover
+                            </button>
+
+                        </div>
+                    `;
+                }
+
+            });
+    }
+
+    function desfavoritar(idLivro) {
+
+        var idUsuario = sessionStorage.ID_USUARIO;
+
+        fetch("http://localhost:3333/favoritos/desfavoritar", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fkUsuario: idUsuario,
+                fkLivro: idLivro
+            })
+        })
+        .then(function (resposta) {
+            if (resposta.ok) {
+                alert("Removido dos favoritos!");
+                listarFavoritos(); // atualiza a lista
+            } else {
+                alert("Erro ao remover");
+            }
+        });
+
+    }
+
+</script>
+
+</html>

@@ -1,0 +1,287 @@
+<!-- ============================================================ -->
+<!-- ARQUIVO COMENTADO: public/login.html -->
+<!-- Comentários adicionados para explicar a função das tags e scripts. -->
+<!-- ============================================================ -->
+<!-- Informa ao navegador que este documento usa HTML5. -->
+<!DOCTYPE html>
+<!-- Tag raiz da página. Todo o conteúdo HTML fica dentro dela. -->
+<html lang="pt-br">
+
+<!-- Área de configurações da página, como título, links de CSS e metadados. -->
+<head>
+<!-- Define informações da página, como acentuação, responsividade ou compatibilidade. -->
+    <meta charset="UTF-8">
+<!-- Define informações da página, como acentuação, responsividade ou compatibilidade. -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- Define informações da página, como acentuação, responsividade ou compatibilidade. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Define o título que aparece na aba do navegador. -->
+    <title>AquaTech | Login</title>
+
+<!-- Carrega ou inicia código JavaScript na página. -->
+    <script src="./js/sessao.js"></script>
+
+<!-- Conecta um arquivo externo, como CSS, ícone ou fonte. -->
+    <link rel="stylesheet" href="./css/estilo.css">
+<!-- Conecta um arquivo externo, como CSS, ícone ou fonte. -->
+    <link rel="icon" href="./assets/icon/favicon2.ico">
+<!-- Conecta um arquivo externo, como CSS, ícone ou fonte. -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<!-- Fecha uma tag aberta anteriormente. -->
+</head>
+
+<!-- Área visível da página, onde ficam os elementos que aparecem para o usuário. -->
+<body>
+
+    <!--Header-->
+
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+    <div class="header">
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+        <div class="container">
+<!-- Cria um título. Quanto menor o número, maior a importância visual/semântica. -->
+            <h1 class="titulo">AquaTech</h1>
+<!-- Elemento ou conteúdo da página HTML. -->
+            <ul class="navbar">
+<!-- Elemento ou conteúdo da página HTML. -->
+                <li>
+<!-- Cria um link para navegar para outra página ou área. -->
+                    <a href="index.html">Inicial</a>
+<!-- Fecha uma tag aberta anteriormente. -->
+                </li>
+<!-- Elemento ou conteúdo da página HTML. -->
+                <li>
+<!-- Cria um link para navegar para outra página ou área. -->
+                    <a href="simulador.html">Simulador</a>
+<!-- Fecha uma tag aberta anteriormente. -->
+                </li>
+<!-- Elemento ou conteúdo da página HTML. -->
+                <li>|</li>
+<!-- Elemento ou conteúdo da página HTML. -->
+                <li class="agora">
+<!-- Cria um link para navegar para outra página ou área. -->
+                    <a href="#">Login</a>
+<!-- Fecha uma tag aberta anteriormente. -->
+                </li>
+<!-- Elemento ou conteúdo da página HTML. -->
+                <li>
+<!-- Cria um link para navegar para outra página ou área. -->
+                    <a href="cadastro.html">Cadastro</a>
+<!-- Fecha uma tag aberta anteriormente. -->
+                </li>
+<!-- Fecha uma tag aberta anteriormente. -->
+            </ul>
+<!-- Fecha uma tag aberta anteriormente. -->
+        </div>
+<!-- Fecha uma tag aberta anteriormente. -->
+    </div>
+
+
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+    <div class="login">
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+        <div class="alerta_erro">
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+            <div class="card_erro" id="cardErro">
+<!-- Cria um trecho inline para aplicar estilo ou manipular uma parte pequena do texto. -->
+                <span id="mensagem_erro"></span>
+<!-- Fecha uma tag aberta anteriormente. -->
+            </div>
+<!-- Fecha uma tag aberta anteriormente. -->
+        </div>
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+        <div class="container">
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+            <div class="card card-login">
+<!-- Cria um título. Quanto menor o número, maior a importância visual/semântica. -->
+                <h2>Olá de volta!</h2>
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+                <div class="formulario">
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+                    <div class="campo">
+<!-- Cria um trecho inline para aplicar estilo ou manipular uma parte pequena do texto. -->
+                        <span>E-mail:</span>
+<!-- Cria um campo para o usuário digitar ou selecionar informações. -->
+                        <input id="email_input" type="text" placeholder="Login">
+<!-- Fecha uma tag aberta anteriormente. -->
+                    </div>
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+                    <div class="campo">
+<!-- Cria um trecho inline para aplicar estilo ou manipular uma parte pequena do texto. -->
+                        <span>Senha:</span>
+<!-- Cria um campo para o usuário digitar ou selecionar informações. -->
+                        <input id="senha_input" type="password" placeholder="******">
+<!-- Fecha uma tag aberta anteriormente. -->
+                    </div>
+<!-- Cria um botão clicável. -->
+                    <button class="botao" onclick="entrar()">Entrar</button>
+<!-- Fecha uma tag aberta anteriormente. -->
+                </div>
+
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+                <div id="div_aguardar" class="loading-div">
+<!-- Mostra uma imagem na página. -->
+                    <img src="./assets/circle-loading.gif" id="loading-gif">
+<!-- Fecha uma tag aberta anteriormente. -->
+                </div>
+
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+                <div id="div_erros_login"></div>
+<!-- Fecha uma tag aberta anteriormente. -->
+            </div>
+<!-- Fecha uma tag aberta anteriormente. -->
+        </div>
+<!-- Fecha uma tag aberta anteriormente. -->
+    </div>
+
+    <!--footer inicio-->
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+    <div class="footer">
+<!-- Cria uma divisão/bloco genérico para organizar o layout. -->
+        <div class="container">
+<!-- Cria um título. Quanto menor o número, maior a importância visual/semântica. -->
+            <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
+<!-- Cria um trecho inline para aplicar estilo ou manipular uma parte pequena do texto. -->
+            <span class="version">v1.0.0</span>
+<!-- Fecha uma tag aberta anteriormente. -->
+        </div>
+<!-- Fecha uma tag aberta anteriormente. -->
+    </div>
+    <!--footer fim-->
+
+<!-- Fecha uma tag aberta anteriormente. -->
+</body>
+
+<!-- Fecha uma tag aberta anteriormente. -->
+</html>
+
+<!-- Carrega ou inicia código JavaScript na página. -->
+<script>
+
+
+// Cria uma função. Essa função agrupa comandos para serem executados quando for chamada.
+    function entrar() {
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+        aguardar();
+
+// Define ou altera um valor usado pelo programa.
+        var emailVar = email_input.value;
+// Define ou altera um valor usado pelo programa.
+        var senhaVar = senha_input.value;
+
+// Inicia uma condição. O código dentro do bloco só executa se a condição for verdadeira.
+        if (emailVar == "" || senhaVar == "") {
+// Define ou altera um valor usado pelo programa.
+            cardErro.style.display = "block"
+// Define ou altera um valor usado pelo programa.
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+            finalizarAguardar();
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+            return false;
+// Fecha o bloco de código iniciado anteriormente.
+        }
+// Abre um bloco de código. Tudo dentro dele pertence a essa estrutura.
+        else {
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+            setInterval(sumirMensagem, 5000)
+// Fecha o bloco de código iniciado anteriormente.
+        }
+
+// Mostra uma mensagem no terminal ou no console para ajudar a testar e depurar.
+        console.log("FORM LOGIN: ", emailVar);
+// Mostra uma mensagem no terminal ou no console para ajudar a testar e depurar.
+        console.log("FORM SENHA: ", senhaVar);
+
+// Faz uma requisição HTTP do front-end para uma rota/API.
+        fetch("/usuarios/autenticar", {
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+            method: "POST",
+// Abre um bloco de código. Tudo dentro dele pertence a essa estrutura.
+            headers: {
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+                "Content-Type": "application/json"
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+            },
+// Abre um bloco de código. Tudo dentro dele pertence a essa estrutura.
+            body: JSON.stringify({
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+                emailServer: emailVar,
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+                senhaServer: senhaVar
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+            })
+// Abre um bloco de código. Tudo dentro dele pertence a essa estrutura.
+        }).then(function (resposta) {
+// Mostra uma mensagem no terminal ou no console para ajudar a testar e depurar.
+            console.log("ESTOU NO THEN DO entrar()!")
+
+// Inicia uma condição. O código dentro do bloco só executa se a condição for verdadeira.
+            if (resposta.ok) {
+// Mostra uma mensagem no terminal ou no console para ajudar a testar e depurar.
+                console.log(resposta);
+
+// Abre um bloco de código. Tudo dentro dele pertence a essa estrutura.
+                resposta.json().then(json => {
+// Mostra uma mensagem no terminal ou no console para ajudar a testar e depurar.
+                    console.log(json);
+// Mostra uma mensagem no terminal ou no console para ajudar a testar e depurar.
+                    console.log(JSON.stringify(json));
+// Usa o sessionStorage, que guarda dados temporários enquanto a aba/navegador está aberto.
+                    sessionStorage.EMAIL_USUARIO = json.email;
+// Usa o sessionStorage, que guarda dados temporários enquanto a aba/navegador está aberto.
+                    sessionStorage.NOME_USUARIO = json.nome;
+// Usa o sessionStorage, que guarda dados temporários enquanto a aba/navegador está aberto.
+                    sessionStorage.ID_USUARIO = json.id;
+// Usa o sessionStorage, que guarda dados temporários enquanto a aba/navegador está aberto.
+                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+
+// Abre um bloco de código. Tudo dentro dele pertence a essa estrutura.
+                    setTimeout(function () {
+// Define ou altera um valor usado pelo programa.
+                        window.location = "./dashboard/cards.html";
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+                    }, 1000); // apenas para exibir o loading
+
+// Fecha o bloco de código iniciado anteriormente.
+                });
+
+// Executa este bloco quando as condições anteriores não foram atendidas.
+            } else {
+
+// Mostra uma mensagem no terminal ou no console para ajudar a testar e depurar.
+                console.log("Houve um erro ao tentar realizar o login!");
+
+// Abre um bloco de código. Tudo dentro dele pertence a essa estrutura.
+                resposta.text().then(texto => {
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+                    console.error(texto);
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+                    finalizarAguardar(texto);
+// Fecha o bloco de código iniciado anteriormente.
+                });
+// Fecha o bloco de código iniciado anteriormente.
+            }
+
+// Abre um bloco de código. Tudo dentro dele pertence a essa estrutura.
+        }).catch(function (erro) {
+// Mostra uma mensagem no terminal ou no console para ajudar a testar e depurar.
+            console.log(erro);
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+        })
+
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+        return false;
+// Fecha o bloco de código iniciado anteriormente.
+    }
+
+// Cria uma função. Essa função agrupa comandos para serem executados quando for chamada.
+    function sumirMensagem() {
+// Define ou altera um valor usado pelo programa.
+        cardErro.style.display = "none"
+// Fecha o bloco de código iniciado anteriormente.
+    }
+
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+</script>

@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../Estilos/style.css">
+    <link rel="stylesheet" href="estilos/style.css">
     <title>Biblioteca Virtual</title>
+    <script src="./js/sessao.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -13,7 +14,7 @@
         rel="stylesheet">
 </head>
 
-<body>
+<body onload="Carregar()">
     <div class="container">
         <div class="container-principal">
             <div class="nav-bar">
@@ -22,33 +23,40 @@
                     <h1>Biblioteca Virtual</h1>
                 </div>
                 <div class="elemento-nav-2">
-                    <a href="#">Home</a>
-                    <a href="#">Biblioteca</a>
-                    <a href="#">Favoritos</a>
+                    <a href="./index.html">Home</a>
+                    <a href="./biblioteca.html">Biblioteca</a>
+                    <a href="./favoritos.html">Favoritos</a>
                     <a href="#">Sobre</a>
                 </div>
                 <div class="elemento-nav-3">
-                    <p>Entrar</p>
-                    <div class="elemento-nav-4">
-                        <a href="#" class="botao-criar">
-                            Criar Conta
-                            <img src="../Img/pin2.png" alt="">
-                        </a>
+                    <div id="botoes_deslogado" class="botoes_deslogado">
+                        <a href="./login.html">Entrar</a>
+
+                        <div class="elemento-nav-4">
+                            <button onclick="Redirecionar()" class="botao-criar">
+                                Criar Conta
+                                <img src="../img/pin2.png" alt="">
+                            </button>
+                        </div>
                     </div>
+                    <button onclick="Sair()" id="btnSair" class="btn-sair">
+                        Sair
+                        <img src="../img/pin2.png"alt="">
+                    </button>
                 </div>
             </div>
             <div class="container-introducao">
                 <div class="container-auxiliar">
                     <div class="elemento-introducao-1">
                         <div class="elemento-introducao-2">
-                            <img src="../Img/pin1.png" alt="">
+                            <img src="../img/pin1.png" alt="">
                             <h3>SEJA BEM-VINDO A MINHA</h3>
                         </div>
                         <div class="elemento-introducao-3">
                             <h1>Biblioteca<br>Virtual</h1>
                         </div>
                         <div class="borboleta-hero">
-                            <img src="../Img/borboleta.png" alt="Borboleta decorativa">
+                            <img src="../img/borboleta.png" alt="Borboleta decorativa">
                         </div>
                         <div class="elemento-introducao-4">
                             <span class="linha"></span>
@@ -63,12 +71,32 @@
                         </div>
                     </div>
                     <div class="elemento-introducao-7">
-                        <img src="../Img/banner.png" alt="">
+                        <img src="../img/banner.png" alt="">
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        function Carregar() {
+            let id = sessionStorage.ID_USUARIO
+            if (id == undefined || id == null) {
+                btnSair.style.display = "none"
+            }
+            else {
+                botoes_deslogado.style.display = "none"
+            }
+        }
+
+        function Sair() {
+            limparSessao()
+        }
+
+        function Redirecionar() {
+            window.location = "./cadastro.html"
+        }
+    </script>
 </body>
 
 </html>

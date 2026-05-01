@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos/style-cadastro-login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="./js/sessao.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container-tela-inteira-cadastro">
+        <div class="container-moldura">
+            <div class="container-tela-imagem">
+                <div class="container-imagem">
+                    <img src="../img/fundo-login.png" alt="" class="imagem-tela-login">
+                    <div class="container-moldura-imagem">
+                        <div class="btn-voltar-home">
+                            <img src="" alt="">
+                            <a href="./index.html">Voltar para Home</a>
+                        </div>
+                        <div class="texto-login-img">
+                            <h1>Bem Vindos</h1>
+                            <h3>ao seu espaço de histórias</h3>
+                        </div>
+                        <div class="img-flor">
+                            <img src="./img/icon-flor-login.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-tela-formulario">
+                <div class="container-formulario">
+                    <div class="linha-login">
+                        <img src="../img/icon-linha-2.png" alt="">
+                    </div>
+                    <div class="img-borboleta">
+                        <img src="../img/borboleta.png" alt="">
+                    </div>
+                    <div class="texto-login">
+                        <span>Criar conta</span>
+                        <p>Crie uma conta </p>
+                        <p>e comece sua jornada de leitura</p>
+                    </div>
+                    <div class="container-inputs">
+                        <div class="texto-input">
+                            <p>Nome:</p>
+                        </div>
+                        <div class="inptus">
+                            <div class="img-input">
+                            </div>
+                            <input type="text" placeholder="Seu nome completo" id="id_nome">
+                        </div>
+                        <div class="texto-input">
+                            <p>E-mail:</p>
+                        </div>
+                        <div class="inptus">
+                            <div class="img-input">
+                            </div>
+                            <input type="text" placeholder="seu@email.com" id="id_email">
+                        </div>
+                        <div class="texto-input">
+                            <p>Senha:</p>
+                        </div>
+                        <div class="inptus">
+                            <div class="img-input">
+                            </div>
+                            <input type="password" placeholder="Sua senha" id="id_senha">
+                        </div>
+                        <div class="texto-input">
+                            <p>Confirmar senha:</p>
+                        </div>
+                        <div class="inptus">
+                            <div class="img-input">
+                            </div>
+                            <input type="password" placeholder="Sua senha" id="id_confirmar_senha">
+                        </div>
+                    </div>
+                    <div id="id_mensagem" class="mensagem"></div>
+                    <div class="btn-entrar">
+                        <button onclick="Cadastrar()">
+                            <img src="../img/icon-pin4.png" alt="">
+                            Criar conta</button>
+                    </div>
+                    <div class="container-btn-criar-conta">
+                        <div class="ou">
+                            <img src="../img/icon-flecha-direita.png" alt="">
+                            <p>Já tem uma conta?</p>
+                            <img src="../img/icon-flecha-esquerda.png" alt="">
+                        </div>
+                        <div class="btn-criar-conta">
+                            <a href="./login.html">
+                                <img src="../img/icon-flor-cadastro.png" alt="">
+                                Entrar</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flor-de-baixo">
+                    <img src="../img/icon-flor-1.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="modal_sucesso" class="modal-fundo">
+            <div class="modal-card">
+                <div class="img-sucesso">
+                    <img src="./img/icon-sucesso.png" alt="">
+                </div>
+                <div class="img-linha">
+                    <img src="./img/icon-linha-3.png" alt="">
+                </div>
+
+                <h2>Cadastro realizado <br> com sucesso!</h2>
+
+                <p>Sua conta foi criada com sucesso. Você será redirecionado para a tela de login.</p>
+
+                <button onclick="window.location.href='./login.html'">
+                    OK
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function Validar() {
+            let nome = id_nome.value
+            let email = id_email.value
+            let senha = id_senha.value
+            let confirmarSenha = id_confirmar_senha.value
+
+            let validou = true
+            let mensagem = ''
+            // validação do nome
+            let restricaoNome = ['@', '#', '$', '*', '/', '<', '>', '!', '%', '&', '?', '=', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+
+            let nomeTamanho = nome.length
+            let senhaTamanho = senha.length
+
+            let temCaracterProibido = false
+            for (let i = 0; i < restricaoNome.length; i++) {
+                let indiceLista = restricaoNome[i]
+                if (nome.includes(indiceLista)) {
+                    // nome tem caracter não permitido
+                    temCaracterProibido = true
+                    break
+                }
+            }
+            if (nome == '' || nomeTamanho < 3 || temCaracterProibido) {
+                // nome não pode ser nulo
+                // nome tem que ter no mínimo 3 caracteres
+                mensagem = 'O nome não pode conter números, nem símbolos.'
+                validou = false
+            }
+            // validação do email
+            else if (email == '' || !email.includes('@') || !email.includes('.') || email.includes(' ')) {
+                // email não pode ser nulo
+                // email precisa ter @
+                // email precisa ter ponto, tipo .com
+                // email não pode ter espaço
+                mensagem = 'O e-mail precisa ter @ e . para ser válido.'
+                validou = false
+            }
+            // validação da senha
+            else if (senha == '' || senhaTamanho < 8 || senha.includes(' ')) {
+                // senha não pode ser nula
+                mensagem = 'A senha precisa ter no mínimo 8 caracteres.'
+                validou = false
+            }
+            // validação da confirmação de senha
+            else if (confirmarSenha == '' || confirmarSenha != senha) {
+                // confirmação de senha não pode ser nula
+                mensagem = 'As senhas não coincidem.'
+                validou = false
+            }
+            id_mensagem.innerHTML = mensagem
+            return validou
+
+        }
+
+        function Cadastrar() {
+            let validacao = Validar()
+            let mensagem = ''
+            if (validacao == false) {
+                console.log('Erro na validação')
+            }
+            else {
+                // cadastrar
+                let nome = id_nome.value
+                let email = id_email.value
+                let senha = id_senha.value
+                let confirmarSenha = id_confirmar_senha.value
+
+                fetch("/usuarios/cadastrar", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    }, body: JSON.stringify({
+                        nomeServer: nome,
+                        emailServer: email,
+                        senhaServer: senha
+                    }),
+                }).then(function (resposta) {
+                    console.log("resposta:", resposta)
+                    if (resposta.ok) {
+                        modal_sucesso.style.display = "flex"
+                        setTimeout(() => {
+                            window.location = "login.html"
+                        }, "4000")
+                    }
+                    else {
+                        throw "Houve um erro ao tentar realizar o cadastro!";
+                    }
+                }).catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`)
+                })
+                return false
+            }
+            id_mensagem.innerHTML += mensagem
+        }
+    </script>
+</body>
+
+</html>
