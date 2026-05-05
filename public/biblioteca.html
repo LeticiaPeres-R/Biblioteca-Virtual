@@ -4,12 +4,90 @@
 <head>
     <meta charset="UTF-8">
     <title>Biblioteca</title>
+    <link rel="stylesheet" href="./estilos/style-biblioteca.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="./js/sessao.js"></script>
 </head>
 
-<body onload="listarLivros()">
+<body onload="listarLivros(), Carregar()">
 
-    <h1>Biblioteca</h1>
-    <div id="container_livros"></div>
+    <div class="container">
+        <div class="container-principal">
+            <div class="nav-bar">
+                <div class="elemento-nav-1">
+                    <img src="./img/pin1.png" alt="">
+                    <h1>Biblioteca Virtual</h1>
+                </div>
+                <div class="elemento-nav-2">
+                    <a href="./index.html">Home</a>
+                    <a href="./biblioteca.html">Biblioteca</a>
+                    <a href="./favoritos.html">Favoritos</a>
+                    <a href="./index.html#id_banner">Sobre</a>
+                </div>
+                <div class="elemento-nav-3">
+                    <div id="botoes_deslogado" class="botoes_deslogado">
+                        <a href="./login.html">Entrar</a>
+
+                        <div class="elemento-nav-4">
+                            <button onclick="Redirecionar()" class="botao-criar">
+                                Criar Conta
+                                <img src="./img/pin2.png" alt="">
+                            </button>
+                        </div>
+                    </div>
+                    <button onclick="Sair()" id="btnSair" class="btn-sair">
+                        Sair
+                        <img src="./img/pin2.png" alt="">
+                    </button>
+                </div>
+            </div>
+            <div class="container-hero">
+                <img src="./img/icon-porta.png" alt="" class="banner-biblioteca">
+                <span>Minha Biblioteca</span>
+                <img src="./img/icon-moldura-linha.png" alt="" class="linha-hero-biblioteca">
+                <p>Uma seleção dos livros que marcaram minha trajetória</p>
+                <img src="./img/icon-borboleta-estrela.png" alt="" class="borboleta-hero-biblioteca">
+                <img src="./img/icon-flor-estrela.png" alt="" class="flor-hero-biblioteca">
+            </div>
+            <div id="container_livros" class="container-cards">
+            </div>
+            <div class="footer">
+                <div class="container-texto-footer">
+                    <p>Cada livro é um portal para um mundo que só a imaginação pode abrir</p>
+                    <img src="./img/icon-linha-3.png" alt="" class="linha-footer">
+                    <img src="./img/icon-vaso-livro-footer.png" alt="" class="icon-footer">
+                </div>
+                <div class="container-footer">
+                    <div class="elemento-footer-1">
+                        <div class="elemento-footer-2">
+                            <img src="./img/pin1.png" alt="">
+                            <span>Biblioteca Virtual</span>
+                        </div>
+                        <p>Um espaço para guardar e revisistar histórias que macaram a minha vida</p>
+                    </div>
+                    <div class="elemento-footer-3">
+                        <span>Home</span>
+                        <img src="./img/icon-insta.png" alt="">
+                    </div>
+                    <div class="elemento-footer-4">
+                        <span>Biblioteca</span>
+                        <img src="./img/icon-pinterest.png" alt="">
+                    </div>
+                    <div class="elemento-footer-5">
+                        <span>Favoritos</span>
+                        <img src="./img/icon-email.png" alt="">
+                    </div>
+                    <div class="elemento-footer-6">
+                        <span>Sobre</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         function listarLivros() {
@@ -21,26 +99,48 @@
 
                 for (let i = 0; i < livros.length; i++) {
                     let livro = livros[i];
-                    container += `
-                        <div class="card-livro">
-                            <h3>${livro.titulo}</h3>
-                            <p>${livro.autor}</p>
-
-                            <img 
-                                id="coracao${livro.idLivro}"
-                                src="../img/icon-coracao-vazio.png"
-                                onclick="favoritar(${livro.idLivro})"
-                                width="100"
-                            >
-                        </div>`
+                    container += `        <div class="cards-biblioteca">
+            <img src="./img/icon-fitinha.png" alt="" class="fitinha-cards">
+            <div class="card-capa">
+                <img src="https://m.media-amazon.com/images/I/71oxE2vkZmL._AC_UF1000,1000_QL80_.jpg" alt="">
+            </div>
+            <div class="card-conteudo">
+                <img src="./img/icon-coracao-vazio.png" alt="" class="coracao-card" id="coracao${livro.idLivro}" onclick="favoritar(${livro.idLivro})">
+                <span class="titulo-card">
+                    ${livro.titulo}
+                </span>
+                <span class="autor-card">
+                    ${livro.autor}
+                </span>
+                <img src="./img/icon-linha-cards.png" alt="" class="linha-card">
+                <button onclick="CarregarPreview()" class="btn-amostra">
+                    <img src="./img/icon-pin3.png" alt="">
+                    Ler amostra
+                </button>
+            </div>
+        </div>
+                `
                 }
 
                 container_livros.innerHTML = container
             })
 
         }
-
-
+        function Carregar() {
+            let id = sessionStorage.ID_USUARIO
+            if (id == undefined || id == null) {
+                btnSair.style.display = "none"
+            }
+            else {
+                botoes_deslogado.style.display = "none"
+            }
+        }
+        function Sair() {
+            limparSessao()
+        }
+        function Redirecionar() {
+            window.location = "./cadastro.html"
+        }
         function favoritar(idLivro) {
             let idUsuario = sessionStorage.ID_USUARIO
 
