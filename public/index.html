@@ -29,7 +29,7 @@
                     <a href="#id_banner">Sobre</a>
                 </div>
                 <div class="elemento-nav-3">
-                    <div id="botoes_deslogado" class="botoes_deslogado">
+                    <div style="display: none;" id="botoes_deslogado" class="botoes_deslogado">
                         <a href="./login.html">Entrar</a>
 
                         <div class="elemento-nav-4">
@@ -39,7 +39,7 @@
                             </button>
                         </div>
                     </div>
-                    <button onclick="Sair()" id="btnSair" class="btn-sair">
+                    <button style="display: none;" onclick="Sair()" id="btnSair" class="btn-sair">
                         Sair
                         <img src="./img/pin2.png" alt="">
                     </button>
@@ -227,10 +227,10 @@
         function Carregar() {
             let id = sessionStorage.ID_USUARIO
             if (id == undefined || id == null) {
-                btnSair.style.display = "none"
+                botoes_deslogado.style.display = "flex"
             }
             else {
-                botoes_deslogado.style.display = "none"
+                btnSair.style.display = "flex"
             }
         }
 
