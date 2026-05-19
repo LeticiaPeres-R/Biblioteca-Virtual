@@ -232,9 +232,10 @@
         }
 
         .card-capa {
-            width: 140px;
+            width: 130px;
             height: 200px;
             border-radius: 8px;
+            border: 1px solid #C9A96E;
             margin-right: 10px;
 
             img {

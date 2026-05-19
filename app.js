@@ -37,6 +37,8 @@ var favoritosRouter = require("./src/routes/favoritos")
 
 var livrosRouter = require("./src/routes/livros")
 
+var dashboardRouter = require("./src/routes/dashboard")
+
 // Registra um middleware ou uma rota no Express para a aplicação usar.
 app.use(express.json());
 // Registra um middleware ou uma rota no Express para a aplicação usar.
@@ -56,6 +58,8 @@ app.use("/usuarios", usuarioRouter);
 app.use("/favoritos", favoritosRouter)
 
 app.use("/livros", livrosRouter)
+
+app.use("/dashboard", dashboardRouter)
 
 // Inicia o servidor e deixa a API pronta para receber requisições.
 app.listen(PORTA_APP, function () {

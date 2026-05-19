@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./estilos/style-dashboard.css">
+    <title>Dashboard</title>
+    <script src="./js/sessao.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="shortcut icon" href="./img/icon-gatinho.png" type="image/x-icon">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body onload="carregarDashboard()">
+    <div class="container">
+        <div class="container-principal">
+            <div class="container-menu">
+                <div class="titulo-menu">
+                    <img src="./img/pin2.png" alt="">
+                    <span>Biblioteca Virtual</span>
+                </div>
+                <div class="perfil-menu">
+                    <img src="./img/img-perfil.png" alt="" class="img-perfil">
+                    <img src="./img/icon-lateral-direito.png" alt="" class="moldura-direita">
+                    <img src="./img/icon-lateral-esquerdo.png" alt="" class="moldura-esquerda">
+                </div>
+                <div class="texto-menu">
+                    <span class="elemento-menu-1">Bem-vindo,</span>
+                    <span class="elemento-menu-2" id="b_usuario">Letícia</span>
+                    <span class="elemento-menu-3">Que bom te ver por aqui!</span>
+                </div>
+                <div class="linha">
+                    <img src="./img/icon-linha-6.png" alt="">
+                </div>
+                <div class="botoes-menu">
+                    <!-- <img src="./img/icon-dashboard.png"> -->
+                    <button class="btn-dash" onclick="window.location.href='./dashboard.html'">Dashboard</button>
+                    <button class="btn" onclick="window.location.href='./biblioteca.html'"><img
+                            src="./img/icon-livro-painel.png">Biblioteca</button>
+                    <button class="btn" onclick="window.location.href='./favoritos.html'"><img
+                            src="./img/icon-coracao-painel.png">Favoritos</button>
+                    <button class="btn" onclick="limparSessao()"><img src="./img/icon-sair.png">Sair</button>
+                </div>
+                <img src="./img/flor-menu.png" class="flor-menu">
+            </div>
+            <div class="container-painel">
+                <div class="titulo-painel">
+                    <span class="titulo-dash">Dashboard</span>
+                    <img src="./img/linha-dash-painel.png" alt="">
+                    <span class="subtitulo-dash">Acompanhe suas leituras e descubra novos insights</span>
+                </div>
+                <div class="data-atual">
+                    <img src="./img/icon-calendario.png" alt="">
+                    <span id="data_atual">15 de Maio de 2026</span>
+                </div>
+                <div class="container-kpis" id="container_kpis">
+                    <div class="card-kpi">
+                        <span class="titulo-kpi">Total de livros<br>favoritados</span>
+                        <img src="./img/icon-linha-2.png" alt="" class="linha-kpi">
+                        <div class="elemento-kpi">
+                            <img src="./img/icon-livro-kpi.png" alt="" class="icon-livro">
+                            <span class="valor" id="total_favoritos">0</span>
+                        </div>
+                        <span class="subtitulo-kpi">dos 12 disponíveis</span>
+                    </div>
+                    <div class="card-kpi">
+                        <span class="titulo-kpi">Porcentagem do<br>acervo favoritado</span>
+                        <img src="./img/icon-linha-2.png" alt="" class="linha-kpi">
+                        <div class="elemento-kpi">
+                            <img src="./img/icon-livro-kpi.png" alt="" class="icon-livro">
+                            <span class="valor" id="total_acervo_porcentagem">0</span>
+                        </div>
+                        <span class="subtitulo-kpi" id="subtitulo_acervo">do acervo disponível</span>
+                    </div>
+                    <div class="card-kpi">
+                        <span class="titulo-kpi">Livro mais favoritado <br><span
+                                style="margin-left: 60px;">(Geral)</span></span>
+                        <!-- <img src="./img/icon-linha-2.png" alt="" class="linha-kpi linha-livro"> -->
+                        <div class="elemento-kpi-1">
+                            <div class="elemento-kpi-2" id="img_capa">
+                            </div>
+                            <div class="elemento-kpi-3">
+                                <span class="titulo-livro" id="titulo_livro">O Castelo Animado</span>
+                                <span class="autor-livro" id="autor_livro">Diana Wynne Jones</span>
+                            </div>
+                        </div>
+                        <!-- <span class="posicao-kpi">1º lugar</span> -->
+                    </div>
+                    <div class="card-kpi">
+                        <span class="titulo-kpi">Gênero mais<br> favoritado</span>
+                        <img src="./img/icon-linha-2.png" alt="" class="linha-kpi">
+                        <div class="elemento-kpi">
+                            <!-- <img src="./img/icon-livro-kpi.png" alt="" class="icon-livro"> -->
+                            <span class="valor" id="total_genero">0</span>
+                        </div>
+                        <span class="subtitulo-kpi" id="subtitulo_genero">mais presente nos favoritos</span>
+                    </div>
+                </div>
+                <div class="container-graficos">
+                    <div class="graficos-barras">
+                        <div class="titulo">Top 5 livros mais favoritados</div>
+                        <div class="area-grafico-barras">
+                            <canvas id="graf_barras"></canvas>
+                        </div>
+                    </div>
+                    <div class="graficos-donut">
+                        <div class="titulo">Distribuição por gênero</div>
+                        <div class="area-grafico-donut">
+                            <canvas id="graf_donut"></canvas>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="container-lista-card">
+                    <div class="container-lista" id="conteud_lista_card">
+                        <div class="titulo-lista-card">
+                            <span>Meus 5 livros favoritados recentemente</span>
+                        </div>
+
+                        <div id="conteudo_lista_card"></div>
+                    </div>
+                    <div class="container-card">
+                        <img src="./img/flor-esquerda.png" alt="" class="flor-esquerda">
+                        <span>Cada página que você lê é um passo rumo a um novo mundo de possibilidades</span>
+                        <img src="./img/linha-dash-painel.png" alt="" class="linha-moldura">
+                        <img src="./img/flor-direita.png" alt="" class="flor-direita">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const data = new Date();
+        console.log(data); // Ex: Fri Jun 17 2022 11:27:28 GMT-0300 (Horário Padrão de Brasília
+        function carregarDashboard() {
+            let fkUsuario = sessionStorage.ID_USUARIO
+            b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+            const data = new Date();
+            const opcoes = { year: 'numeric', month: 'long', day: 'numeric' };
+            const dataFormatada = data.toLocaleDateString('pt-BR', opcoes);
+            data_atual.innerHTML = dataFormatada
+            totalFavoritos(fkUsuario)
+            porcentagemAcervo(fkUsuario)
+            livroMaisFavoritado()
+            generoMaisFavoritado()
+            topCincoLivros()
+            topCincoGeneros()
+            favoritosRecentes(fkUsuario)
+        }
+        function totalFavoritos(fkUsuario) {
+            fetch(`/dashboard/totalFavoritos/${fkUsuario}`)
+                .then(function (resposta) {
+                    return resposta.json()
+                })
+                .then(function (dados) {
+                    let total = dados[0]
+                    total_favoritos.innerHTML = total.totalFavoritos
+                })
+        }
+        function porcentagemAcervo(fkUsuario) {
+            fetch(`/dashboard/porcentagemAcervo/${fkUsuario}`)
+                .then(function (resposta) {
+                    return resposta.json()
+                })
+                .then(function (dados) {
+                    let total = dados[0]
+                    console.log(total)
+                    total_acervo_porcentagem.innerHTML = `${total.porcentagemAcervo}%`
+                    subtitulo_acervo.innerHTML = `Você favoritou ${total.totalFavoritos} de 12 livros`
+                })
+        }
+        function livroMaisFavoritado() {
+            fetch(`/dashboard/livroMaisFavoritado`)
+                .then(function (resposta) {
+                    return resposta.json()
+                })
+                .then(function (dados) {
+                    let total = dados[0]
+                    console.log(total)
+                    img_capa.innerHTML = `<img src="./img/capa/${total.imagem}" alt="">`
+                    titulo_livro.innerHTML = total.titulo
+                    autor_livro.innerHTML = total.autor
+                })
+        }
+        function generoMaisFavoritado() {
+            fetch(`/dashboard/generoMaisFavoritado/`)
+                .then(function (resposta) {
+                    return resposta.json()
+                })
+                .then(function (dados) {
+                    let total = dados[0]
+                    console.log(total)
+                    total_genero.innerHTML = `${total.genero}`
+                    if (total.porcentagemGenero != undefined) {
+                        subtitulo_genero.innerHTML = `${total.porcentagemGenero}% dos favoritos`
+                    }
+                })
+        }
+        function topCincoLivros() {
+            let nomeLivros = []
+            let qtdFavLivros = []
+            let grafBarras = document.getElementById('graf_barras')
+            fetch("/dashboard/topCincoLivros")
+                .then(function (resposta) {
+                    return resposta.json()
+                })
+                .then(function (dados) {
+                    console.log(dados)
+                    for (let i = 0; i < dados.length; i++) {
+                        nomeLivros.push(dados[i].tituloCurto)
+                        qtdFavLivros.push(dados[i].qtdFavoritos)
+                    }
+                    new Chart(grafBarras, {
+                        type: 'bar',
+                        data: {
+                            labels: nomeLivros,
+                            datasets: [{
+                                label: 'Quantidade de favoritos',
+                                data: qtdFavLivros,
+                                backgroundColor: "#6C7D58",
+                                // borderWidth: 1,
+                                borderRadius: 8,
+                                barThickness: 45
+                            }]
+                        },
+                        options: {
+                            plugins: {
+                                legend: {
+                                    display: false
+                                }
+                            },
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    grid: {
+                                        color: "#c9a96e7b",
+                                        borderDash: [5, 5],
+                                        lineWidth: 0.5
+                                    },
+                                    ticks: {
+                                        stepSize: 1,
+                                        color: "#583D19",
+                                        font: {
+                                            size: 11,
+                                            family: "Libre Baskerville"
+                                        }
+                                    }
+                                },
+                                x: {
+                                    grid: {
+                                        display: false,
+                                        lineWidth: 0.5,
+                                        color: "#c9a96e7b",
+                                    },
+                                    ticks: {
+                                        color: "#583D19",
+                                        font: {
+                                            size: 11,
+                                            family: "Libre Baskerville"
+                                        },
+                                        maxRotation: 0,
+                                        minRotation: 0
+                                    }
+                                }
+                            }
+                        }
+                    });
+                })
+        }
+        function topCincoGeneros() {
+            let genero = []
+            let porcentagemGenero = []
+
+            fetch("/dashboard/topCincoGeneros")
+                .then(function (resposta) {
+                    return resposta.json()
+                })
+                .then(function (dados) {
+                    console.log(dados)
+                    for (let i = 0; i < dados.length; i++) {
+                        genero.push(`${dados[i].genero} - ${dados[i].porcentagemGenero}%`)
+                        porcentagemGenero.push(dados[i].porcentagemGenero)
+                    }
+
+                    let grafDonut = document.getElementById('graf_donut')
+
+                    new Chart(grafDonut, {
+                        type: 'doughnut',
+                        data: {
+                            labels: genero,
+                            datasets: [{
+                                data: porcentagemGenero,
+                                backgroundColor: ['#6C7D58', '#E8DCC8', '#C9A96E', '#DFA6A6', '#3E6335'],
+                                borderWidth: 0
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    position: 'right',
+                                    display: true,
+                                    labels: {
+                                        boxWidth: 18,
+                                        boxHeight: 18,
+                                        padding: 25,
+                                        useBorderRadius: true,
+                                        borderRadius: 9,
+                                        color: '#583D19',
+
+                                        font: {
+                                            size: 16,
+                                            family: 'Libre Baskerville'
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    })
+                })
+        }
+        function favoritosRecentes(fkUsuario) {
+            let container = ""
+
+            fetch(`/dashboard/favoritosRecentes/${fkUsuario}`)
+                .then(function (resposta) {
+                    return resposta.json()
+                })
+                .then(function (dados) {
+                    for (let i = 0; i < dados.length; i++) {
+                        let dadosAtual = dados[i]
+                        let borda = ""
+
+                        if (i == dados.length - 1) {
+                            borda = "style='border-bottom: none;'"
+                        }
+
+                        container += `
+                    <div class="conteudo-lista-card" ${borda}>
+                        <span class="bolinha">${i + 1}</span>
+
+                        <span class="img-capa">
+                            <img src="./img/icon-gatinho.png" alt="">
+                        </span>
+
+                        <span class="titulo-livro">${dadosAtual.titulo}</span>
+
+                        <div class="data">
+                            <img src="./img/icon-calendario.png" alt="">
+                            <span class="data-lista">${dadosAtual.dataFavoritado}</span>
+                        </div>
+                    </div>
+                `
+                    }
+
+                    document.getElementById("conteudo_lista_card").innerHTML = container
+                })
+        }
+    </script>
+
+</body>
+
+</html>
