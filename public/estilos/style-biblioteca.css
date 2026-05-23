@@ -31,8 +31,8 @@
     height: 100px;
     background-color: #F5F1E8;
     border-radius: 25px;
-    border: 2px solid #C9A96E;
-    box-shadow: 0px 4px 10px #2f2f2f55;
+    border: 1px solid #C9A96E;
+    box-shadow: 0px 4px 10px #2f2f2f24;
     /* position: fixed; */
 
 
@@ -296,6 +296,7 @@
                 color: #3E6335;
                 font-size: 0.95rem;
                 font-family: 'Libre Baskerville', serif;
+                cursor: pointer;
 
                 img {
                     position: absolute;
@@ -303,6 +304,286 @@
                     right: 100px;
                     width: 90px;
                 }
+            }
+        }
+    }
+}
+
+.container-detalhes {
+    width: 100%;
+    position: relative;
+    height: 550px;
+    background-color: #F5F1E8;
+    border-radius: 25px;
+    border: 1px solid #C9A96E;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+
+    .btn-voltar-biblioteca {
+        position: absolute;
+        background-color: #F5F1E8;
+        display: flex;
+        justify-content: flex-start;
+        top: 15px;
+        left: 15px;
+        width: 235px;
+        height: 50px;
+        align-items: center;
+        /* border: 1px solid #C9A96E; */
+        border-radius: 10px;
+
+        a {
+            padding-left: 13px;
+            text-align: center;
+            color: #3E6335;
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1rem;
+        }
+        img{
+            padding-left: 18px;
+        }
+    }
+
+    /* .flor {
+        position: absolute;
+        width: 230px;
+        left: -42px;
+        top: 220px;
+    } */
+    .flor {
+        position: absolute;
+        width: 220px;
+        left: -5px;
+        top: 220px;
+    }
+    
+
+    .flor-2 {
+        position: absolute;
+        width: 280px;
+        right: -60px;
+        top: 370px;
+    }
+
+    .borboleta {
+        width: 300px;
+        position: absolute;
+        top: -15px;
+        right: -35px;
+
+    }
+
+    .container-informacoes {
+        width: 35%;
+        height: 90%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: column;
+        /* background-color: #DFA6A6; */
+        position: relative;
+
+        .elemente-info-1 {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* background-color: #583D19; */
+
+            .titulo {
+                font-family: 'Playfair Display', serif;
+                color: #3E6335;
+                font-size: 2.1rem;
+                width: 350px;
+                text-align: center;
+                /* background-color: #583D19; */
+                font-weight: 500;
+            }
+
+            .linha-coracao {
+                position: absolute;
+                top: -25px;
+                left: 35px;
+                width: 280px;
+            }
+
+            .autor {
+                color: #3E6335;
+                font-size: 1rem;
+                font-family: 'Libre Baskerville', serif;
+                margin-top: 60px;
+                text-align: center;
+            }
+        }
+
+        .elemento-info-2 {
+            display: flex;
+            flex-direction: column;
+            /* background-color: #583D19; */
+            height: 150px;
+            justify-content: space-between;
+            width: 280px;
+            /* margin-bottom: 70px; */
+
+            img {
+                width: 50px;
+                position: absolute;
+
+            }
+
+            .elemento-info-3 {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+
+
+                .icon-pessoinha {
+                    /* position: absolute; */
+                    bottom: 193px;
+                    /* width: 50px; */
+                }
+
+                .icon-livrozinho {
+                    /* position: absolute; */
+                    bottom: 131px;
+                    /* width: 50px; */
+                }
+
+                .icon-florzinha {
+                    width: 65px;
+                    bottom: 33px;
+                    right: 323px;
+
+                }
+
+                .autor {
+                    font-family: 'Playfair Display', serif;
+                    color: #3E6335;
+                    font-size: 1.2rem;
+                    margin-left: 50px;
+                    width: 70px;
+                }
+
+                .genero {
+                    font-family: 'Playfair Display', serif;
+                    color: #3E6335;
+                    font-size: 1.2rem;
+                    margin-left: 50px;
+                    width: 70px;
+                }
+
+                .nota {
+                    font-family: 'Playfair Display', serif;
+                    color: #3E6335;
+                    font-size: 1.2rem;
+                    margin-left: 50px;
+                    width: 70px;
+                }
+
+                .elemento-info-4 {
+                    color: #7A5F3B;
+                    font-size: 1rem;
+                    font-family: 'Libre Baskerville', serif;
+                }
+
+            }
+        }
+    }
+
+
+    .container-conteudo {
+        width: 45%;
+        height: 90%;
+        /* background-color: #758F6F; */
+        border-left: 1px solid #C9A96E;
+        display: flex;
+        flex-direction: column;
+
+        .elemento-conteudo-1 {
+            margin-top: 10px;
+            margin-left: 40px;
+            display: flex;
+            align-items: center;
+
+            .titulo {
+                font-family: 'Playfair Display', serif;
+                color: #3E6335;
+                font-size: 1.5rem;
+                font-weight: 500;
+            }
+
+            img {
+                width: 40px;
+            }
+
+        }
+
+        .elemento-conteudo-2 {
+            margin-top: 40px;
+            margin-left: 40px;
+            display: flex;
+            align-items: center;
+
+            .titulo {
+                font-family: 'Playfair Display', serif;
+                color: #3E6335;
+                font-size: 1.5rem;
+                font-weight: 500;
+            }
+
+            img {
+                width: 40px;
+            }
+
+        }
+
+        .conteudo-sinopse {
+            margin-top: 10px;
+            background-color: #F5F1E8;
+            width: 90%;
+            height: 180px;
+            margin-left: 50px;
+            border-radius: 15px;
+            border: 1px solid #C9A96E;
+            /* text-align: center; */
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            span {
+                width: 90%;
+                color: #583D19;
+                /* text-align: center; */
+                font-size: 1rem;
+                font-family: 'Libre Baskerville', serif;
+
+            }
+
+        }
+
+        .conteudo-resenha {
+            margin-top: 10px;
+            background-color: #F5F1E8;
+            width: 90%;
+            height: 150px;
+            margin-left: 50px;
+            border-radius: 15px;
+            border: 1px solid #C9A96E;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            span {
+                width: 90%;
+                color: #583D19;
+                /* text-align: center; */
+                font-size: 1rem;
+                font-family: 'Libre Baskerville', serif;
+
             }
         }
     }
@@ -357,7 +638,7 @@
         width: 100%;
         height: 200px;
         background-color: #F5F1E8;
-        border: 2px solid #C9A96E;
+        border: 1px solid #C9A96E;
         border-radius: 15px;
         display: flex;
         align-items: center;

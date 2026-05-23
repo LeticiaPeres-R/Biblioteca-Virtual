@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Biblioteca</title>
+    <link rel="shortcut icon" href="./img/icon-gatinho.png" type="image/x-icon">
+    <link rel="stylesheet" href="./estilos/style-biblioteca.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="./js/sessao.js"></script>
+</head>
+
+<body onload="Carregar(), CarregarDetalhes()">
+
+    <div class="container">
+        <div class="container-principal">
+            <div class="nav-bar">
+                <div class="elemento-nav-1">
+                    <img src="./img/pin1.png" alt="">
+                    <h1>Biblioteca Virtual</h1>
+                </div>
+                <div class="elemento-nav-2">
+                    <a href="./index.html">Home</a>
+                    <a href="./biblioteca.html">Biblioteca</a>
+                    <a href="./favoritos.html">Favoritos</a>
+                    <a href="./index.html#id_banner">Sobre</a>
+                </div>
+                <div class="elemento-nav-3">
+                    <div style="display: none;" id="botoes_deslogado" class="botoes_deslogado">
+                        <a href="./login.html">Entrar</a>
+
+                        <div class="elemento-nav-4">
+                            <button onclick="Redirecionar()" class="botao-criar">
+                                Criar Conta
+                                <img src="./img/pin2.png" alt="">
+                            </button>
+                        </div>
+                    </div>
+                    <button style="display: none;" onclick="Sair()" id="btnSair" class="btn-sair">
+                        Sair
+                        <img src="./img/pin2.png" alt="">
+                    </button>
+                </div>
+            </div>
+            <div class="container-detalhes">
+                <div class="btn-voltar-biblioteca">
+                    <img src="./img/flecha.png" alt="">
+                    <a href="./biblioteca.html">Voltar para Biblioteca</a>
+                </div>
+                <img src="./img/flor-menu.png" alt="" class="flor">
+                <img src="./img/icon-flor-1.png" alt="" class="flor-2">
+                <img src="./img/icon-borboleta-estrela.png" alt="" class="borboleta">
+                <div class="container-informacoes">
+                    <div class="elemente-info-1">
+                        <span class="titulo" id="id_titulo">O Homem de Giz</span>
+                        <img src="./img/linha-dash-painel.png" alt="" class="linha-coracao">
+                        <span class="autor" id="id_autor">C.J Tudor</span>
+                    </div>
+                    <div class="elemento-info-2">
+                        <div class="elemento-info-3">
+                            <img src="./img/icon-pessoinha.png" alt="" class="icon-pessoinha">
+                            <span class="autor">Autor:</span>
+                            <div class="elemento-info-4">
+                                <span id="id_autor_2">C.J. Tudor</span>
+                            </div>
+                        </div>
+                        <div class="elemento-info-3">
+                            <img src="./img/icon-livrozinho.png" alt="" class="icon-livrozinho">
+                            <span class="genero">Gênero</span>
+                            <div class="elemento-info-4">
+                                <span id="id_genero">Suspense</span>
+                            </div>
+                        </div>
+                        <div class="elemento-info-3">
+                            <img src="./img/icon-florzinha.png" alt="" class="icon-florzinha">
+                            <span class="nota">Nota:</span>
+                            <div class="elemento-info-4">
+                                <span id="id_nota">7.5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-conteudo">
+                    <div class="elemento-conteudo-1">
+                        <img src="./img/pin2.png" alt="">
+                        <span class="titulo">Sinopse</span>
+                    </div>
+                    <div class="conteudo-sinopse">
+                        <span id="id_sinopse">Um grupo de amigos de infância passa a se comunicar por desenhos feitos com giz, até que a
+                            brincadeira se liga a uma descoberta assustadora. Anos depois, novos símbolos aparecem e
+                            fazem
+                            o passado voltar com força, revelando segredos, traumas e dúvidas que nunca foram totalmente
+                            resolvidos.</span>
+                    </div>
+                    <span class="linha"></span>
+                    <div class="elemento-conteudo-2">
+                        <img src="./img/pin2.png" alt="">
+                        <span class="titulo">Resenha</span>
+                    </div>
+                    <div class="conteudo-resenha">
+                        <span id="id_resenha">Eu gostei bastante porque o livro me deixou muito imersa e curiosa para entender o que
+                            tinha acontecido. O suspense funciona muito bem e o plot me surpreendeu. Só senti falta de
+                            mais detalhes, porque algumas coisas ficaram abertas demais para um livro tão curto.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="container-texto-footer">
+                    <p>Cada livro é um portal para um mundo que só a imaginação pode abrir</p>
+                    <img src="./img/icon-linha-3.png" alt="" class="linha-footer">
+                    <img src="./img/icon-vaso-livro-footer.png" alt="" class="icon-footer">
+                </div>
+                <div class="container-footer">
+                    <div class="elemento-footer-1">
+                        <div class="elemento-footer-2">
+                            <img src="./img/pin1.png" alt="">
+                            <span>Biblioteca Virtual</span>
+                        </div>
+                        <p>Um espaço para guardar e revisistar histórias que macaram a minha vida</p>
+                    </div>
+                    <div class="elemento-footer-3">
+                        <span>Home</span>
+                        <img src="./img/icon-insta.png" alt="">
+                    </div>
+                    <div class="elemento-footer-4">
+                        <span>Biblioteca</span>
+                        <img src="./img/icon-pinterest.png" alt="">
+                    </div>
+                    <div class="elemento-footer-5">
+                        <span>Favoritos</span>
+                        <img src="./img/icon-email.png" alt="">
+                    </div>
+                    <div class="elemento-footer-6">
+                        <span>Sobre</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+        let idLivro = sessionStorage.getItem("ID_LIVRO")
+        console.log(idLivro)
+        function Carregar() {
+            let id = sessionStorage.ID_USUARIO
+            if (id == undefined || id == null) {
+                botoes_deslogado.style.display = "flex"
+            }
+            else {
+                dash_btn.style.display = "flex"
+                btnSair.style.display = "flex"
+            }
+        }
+        function Sair() {
+            limparSessao()
+        }
+        function Redirecionar() {
+            window.location = "./cadastro.html"
+        }
+        function CarregarDetalhes() {
+            fetch(`http://localhost:3333/livros/detalhar/${idLivro}`, {
+                method: "GET"
+            }).then(function (resposta) {
+                if (resposta.ok) {
+                    resposta.json().then(function (livro) {
+                        console.log(livro);
+                        id_titulo.innerHTML = livro.tituloCurto
+                        id_autor.innerHTML = livro.autor
+                        id_autor_2.innerHTML = livro.autor
+                        id_genero.innerHTML = livro.genero
+                        id_nota.innerHTML = livro.nota
+                        id_resenha.innerHTML = livro.opiniao
+                        id_sinopse.innerHTML = livro.resumo
+                    });
+                }
+            })
+        }
+
+    </script>
+
+</body>
+
+</html>

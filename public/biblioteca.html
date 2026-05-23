@@ -89,6 +89,7 @@
             </div>
         </div>
     </div>
+    </div>
     <script>
         function listarLivros() {
             fetch("http://localhost:3333/livros/listar"
@@ -113,9 +114,9 @@
                     ${livro.autor}
                 </span>
                 <img src="./img/icon-linha-cards.png" alt="" class="linha-card">
-                <button onclick="CarregarPreview()" class="btn-amostra">
+                <button onclick="RedirecionarDetalhes(${livro.idLivro})" class="btn-amostra">
                     <img src="./img/icon-pin3.png" alt="">
-                    Ler amostra
+                    Detalhes
                 </button>
             </div>
         </div>
@@ -141,6 +142,11 @@
         }
         function Redirecionar() {
             window.location = "./cadastro.html"
+        }
+        function RedirecionarDetalhes(id) {
+            console.log()
+            sessionStorage.setItem("ID_LIVRO", id);
+            window.location = "./detalhes.html";
         }
         function favoritar(idLivro) {
             let idUsuario = sessionStorage.ID_USUARIO
