@@ -9,6 +9,7 @@
     <script src="./js/sessao.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="shortcut icon" href="./img/icon-gatinho.png" type="image/x-icon">
     <link
         href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
         rel="stylesheet">
@@ -67,8 +68,8 @@
                                 histórias que marcaram minha vida.</p>
                         </div>
                         <div class="elemento-introducao-6">
-                            <a href="#" class="btn-explorar">Explorar Biblioteca</a>
-                            <a href="#" class="btn-saiba">Saiba Mais</a>
+                            <a href="biblioteca.html" class="btn-explorar">Explorar Biblioteca</a>
+                            <a href="#id_banner" class="btn-saiba">Saiba Mais</a>
                         </div>
                     </div>
                     <div class="elemento-introducao-7">
@@ -154,9 +155,9 @@
                         </div>
                         <p>Os livros que marcaram minha trajetória como leitora.</p>
                         <div class="linha-card">
-                            <img src="./img/icon-molfura-linha-2.png" alt="">
+                            <!-- <img src="./img/icon-molfura-linha-2.png" alt=""> -->
                         </div>
-                        <a href="./biblioteca.html">Explorar mais 🠒</a>
+                        <a href="biblioteca.html">Explorar mais 🠒</a>
                     </div>
                     <div class="cards">
                         <img src="./img/icon-fitinha.png" alt="" class="img-fitinha-card">
@@ -169,9 +170,9 @@
                         </div>
                         <p>Seus livros favoritos, guardados para revisitar quando quiser.</p>
                         <div class="linha-card">
-                            <img src="./img/icon-molfura-linha-2.png" alt="">
+                            <!-- <img src="./img/icon-molfura-linha-2.png" alt=""> -->
                         </div>
-                        <a href="./favoritos.html">Explorar mais 🠒</a>
+                        <a href="favoritos.html">Explorar mais 🠒</a>
                     </div>
                     <div class="cards">
                         <img src="./img/icon-fitinha.png" alt="" class="img-fitinha-card">
@@ -184,9 +185,9 @@
                         </div>
                         <p>Um espaço para visualizar e gerenciar sua atividade.</p>
                         <div class="linha-card">
-                            <img src="./img/icon-molfura-linha-2.png" alt="">
+                            <!-- <img src="./img/icon-molfura-linha-2.png" alt=""> -->
                         </div>
-                        <a href="#">Explorar mais 🠒</a>
+                        <a onclick="RedirecionarDash()">Explorar mais 🠒</a>
                     </div>
                 </div>
             </div>
@@ -225,8 +226,8 @@
     </div>
 
     <script>
+        let id = sessionStorage.ID_USUARIO
         function Carregar() {
-            let id = sessionStorage.ID_USUARIO
             if (id == undefined || id == null) {
                 botoes_deslogado.style.display = "flex"
             }
@@ -242,6 +243,14 @@
 
         function Redirecionar() {
             window.location = "./cadastro.html"
+        }
+        function RedirecionarDash() {
+            if (id == undefined || id == null) {
+                alert('Precisa estar logado para acessar a dashboard!')
+            }
+            else{
+                window.location = "./dashboard.html"
+            }
         }
     </script>
 </body>

@@ -1,5 +1,5 @@
+DROP DATABASE IF EXISTS Biblioteca_Virtual;
 CREATE DATABASE Biblioteca_Virtual;
-DROP DATABASE Biblioteca_Virtual;
 USE Biblioteca_Virtual;
 
 CREATE TABLE usuario(
@@ -10,6 +10,8 @@ CREATE TABLE usuario(
 );
 SELECT * FROM usuario;
 
+ALTER TABLE livros ADD COLUMN nota DECIMAL(3,1);
+
 CREATE TABLE livros (
     idLivro INT PRIMARY KEY AUTO_INCREMENT,
     titulo VARCHAR(100),
@@ -18,7 +20,8 @@ CREATE TABLE livros (
     imagem VARCHAR(255),
     genero VARCHAR(100),
 	resumo VARCHAR(800),
-	opiniao VARCHAR(500)
+	opiniao VARCHAR(500),
+    nota DECIMAL(3,1)
 );
 CREATE TABLE favoritos (
     fkUsuario INT NOT NULL,
@@ -28,263 +31,249 @@ CREATE TABLE favoritos (
     FOREIGN KEY (fkLivro) REFERENCES livros(idLivro)
 );
 
-INSERT INTO livros (titulo, tituloCurto, autor, imagem, genero, resumo, opiniao) VALUES
-('O Homem de Giz', 'Homem de Giz', 'C.J. Tudor', 'img-homem-de-giz.jpg', 'Suspense', NULL, NULL),
-('Manual de assassinato para boas garotas', 'Manual Ass.', 'Holly Jackson', 'img-manual-de-assassinato-para-boas-garotas.jpg', 'Mistério', NULL, NULL),
-('Segredo de Sangue', 'Seg. Sangue', 'Tess Gerritsen', 'img-segredo-de-sangue.jpg', 'Suspense', NULL, NULL),
-('O Filho de Netuno', 'Filho Netuno', 'Rick Riordan', 'img-filho-de-netuno.jpg', 'Fantasia', NULL, NULL),
-('O Ladrão de Raios', 'Ladrão Raios', 'Rick Riordan', 'img-ladrao-de-raios.jpg', 'Fantasia', NULL, NULL),
-('O que aconteceu com Annie', 'Acont. Annie', 'C.J. Tudor', 'img-o-que-aconteceu-com-annie.jpg', 'Suspense', NULL, NULL),
-('O Castelo Animado', 'Cas. Animado', 'Diana Wynne Jones', 'img-castelo-animado.jpg', 'Fantasia', NULL, NULL),
-('O Cirurgião', 'O Cirurgião', 'Tess Gerritsen', 'img-cirurgiao.jpg', 'Suspense', NULL, NULL),
-('Caindo na Estrada', 'Caindo Estr.', 'Jeff Kinney', 'img-caindo-na-estrada.jpg', 'Infantojuvenil', NULL, NULL),
-('Jogos Vorazes', 'Jogos Voraz', 'Suzanne Collins', 'img-jogos-vorazes.jpg', 'Distopia', NULL, NULL),
-('E Não Sobrou Nenhum', 'Não Sobrou', 'Agatha Christie', 'img-e-nao-sobrou-nenhum.jpg', 'Mistério', NULL, NULL),
-('Um de Nós Está Mentindo', 'Um de Nós Mnt', 'Karen McManus', 'img-um-de-nos-esta-mentindo.jpg', 'Mistério', NULL, NULL),
-('Neon Genesis Evangelion', 'Evangelion', 'Yoshiyuki Sadamoto', 'img-neon-genesis-evangelion.jpg', 'Mangá', NULL, NULL),
-('Death Note', 'Death Note', 'Tsugumi Ohba e Takeshi Obata', 'img-death-note.jpg', 'Mangá', NULL, NULL),
-('Hunter x Hunter', 'Hunter x H.', 'Yoshihiro Togashi', 'img-hunter-x-hunter.jpg', 'Mangá', NULL, NULL),
-('Haikyuu!!', 'Haikyuu!!', 'Haruichi Furudate', 'img-haikyuu.jpg', 'Mangá', NULL, NULL),
-('Desaparecidas', 'Desaparecidas', 'Tess Gerritsen', 'img-desaparecidas.jpg', 'Suspense', NULL, NULL),
-('Attack on Titan', 'Attack Titan', 'Hajime Isayama', 'img-attack-on-titan.jpg', 'Mangá', NULL, NULL);
+INSERT INTO livros (titulo, tituloCurto, autor, imagem, genero, resumo, opiniao, nota) VALUES
+('O Homem de Giz', 'Homem de Giz', 'C.J. Tudor', 'img-homem-de-giz.jpg', 'Suspense', NULL, NULL, NULL),
+('Manual de assassinato para boas garotas', 'Manual Ass.', 'Holly Jackson', 'img-manual-de-assassinato-para-boas-garotas.jpg', 'Mistério', NULL, NULL, NULL),
+('Segredo de Sangue', 'Seg. Sangue', 'Tess Gerritsen', 'img-segredo-de-sangue.jpg', 'Suspense', NULL, NULL, NULL),
+('O Filho de Netuno', 'Filho Netuno', 'Rick Riordan', 'img-filho-de-netuno.jpg', 'Fantasia', NULL, NULL, NULL),
+('O Ladrão de Raios', 'Ladrão Raios', 'Rick Riordan', 'img-ladrao-de-raios.jpg', 'Fantasia', NULL, NULL, NULL),
+('O que aconteceu com Annie', 'Acont. Annie', 'C.J. Tudor', 'img-o-que-aconteceu-com-annie.jpg', 'Suspense', NULL, NULL, NULL),
+('O Castelo Animado', 'Cas. Animado', 'Diana Wynne Jones', 'img-castelo-animado.jpg', 'Fantasia', NULL, NULL, NULL),
+('O Cirurgião', 'O Cirurgião', 'Tess Gerritsen', 'img-cirurgiao.jpg', 'Suspense', NULL, NULL, NULL),
+('Caindo na Estrada', 'Caindo Estr.', 'Jeff Kinney', 'img-caindo-na-estrada.jpg', 'Infantojuvenil', NULL, NULL, NULL),
+('Jogos Vorazes', 'Jogos Voraz', 'Suzanne Collins', 'img-jogos-vorazes.jpg', 'Distopia', NULL, NULL, NULL),
+('E Não Sobrou Nenhum', 'Não Sobrou', 'Agatha Christie', 'img-e-nao-sobrou-nenhum.jpg', 'Mistério', NULL, NULL, NULL),
+('Um de Nós Está Mentindo', 'Um de Nós Mnt', 'Karen McManus', 'img-um-de-nos-esta-mentindo.jpg', 'Mistério', NULL, NULL, NULL),
+('Neon Genesis Evangelion', 'Evangelion', 'Yoshiyuki Sadamoto', 'img-neon-genesis-evangelion.jpg', 'Mangá', NULL, NULL, NULL),
+('Death Note', 'Death Note', 'Tsugumi Ohba e Takeshi Obata', 'img-death-note.jpg', 'Mangá', NULL, NULL, NULL),
+('Hunter x Hunter', 'Hunter x H.', 'Yoshihiro Togashi', 'img-hunter-x-hunter.jpg', 'Mangá', NULL, NULL, NULL),
+('Haikyuu!!', 'Haikyuu!!', 'Haruichi Furudate', 'img-haikyuu.jpg', 'Mangá', NULL, NULL, NULL),
+('Desaparecidas', 'Desaparecidas', 'Tess Gerritsen', 'img-desaparecidas.jpg', 'Suspense', NULL, NULL, NULL),
+('Attack on Titan', 'Attack Titan', 'Hajime Isayama', 'img-attack-on-titan.jpg', 'Mangá', NULL, NULL, NULL);
 
--- Resumo
--- 4 primeiros
+
+-- Resumos atualizados e notas
 UPDATE livros
-SET resumo = 'Em uma pequena cidade marcada por segredos e acontecimentos estranhos, um grupo de amigos passa a se comunicar através de desenhos feitos com giz. 
-O que começa como uma brincadeira inocente na infância rapidamente se transforma em algo perturbador quando símbolos misteriosos começam a aparecer pela cidade, 
-levando os personagens até uma descoberta assustadora. Anos depois, já adultos, eles tentam seguir suas vidas normalmente, mas o passado retorna de forma inesperada 
-quando novos desenhos começam a surgir novamente. Entre memórias fragmentadas, mentiras escondidas e acontecimentos sombrios, a história mistura suspense psicológico, 
-investigação e tensão constante, criando uma narrativa cheia de mistérios e reviravoltas.'
-WHERE idLivro = '1';
-
-UPDATE livros
-SET resumo = 'Pip Fitz-Amobi é uma estudante determinada que decide investigar um antigo caso de assassinato que marcou sua cidade anos antes. Oficialmente, todos 
-acreditam que o crime já foi resolvido, mas Pip começa a desconfiar de que existem detalhes ignorados e versões da história que nunca foram realmente questionadas. 
-Enquanto entrevista moradores, analisa provas e descobre novos segredos, ela percebe que o caso é muito mais complexo do que parecia. A investigação acaba colocando a 
-protagonista em situações perigosas e revelando o lado obscuro de uma cidade aparentemente tranquila. A obra combina mistério, investigação criminal e tensão juvenil 
-de forma envolvente.'
-WHERE idLivro = '2';
-
-UPDATE livros
-SET resumo = 'A detetive Jane Rizzoli e a legista Maura Isles se envolvem em mais um caso repleto de mistérios quando acontecimentos violentos começam a levantar dúvidas
- sobre o passado de uma família marcada por segredos antigos. Conforme a investigação avança, conexões inesperadas surgem entre desaparecimentos, crimes brutais e histórias
- escondidas por muitos anos. A narrativa constrói uma atmosfera intensa e investigativa, alternando momentos de suspense psicológico com descobertas impactantes. A cada nova 
- pista, o caso se torna mais perigoso e complexo, mantendo a sensação constante de tensão e desconfiança.'
-WHERE idLivro = '3';
-
-UPDATE livros
-SET resumo = 'Sem lembrar completamente de quem é ou de tudo o que viveu anteriormente, Percy Jackson desperta em um novo lugar cercado por criaturas mitológicas e perigos 
-desconhecidos. Em busca de respostas, ele encontra novos aliados e descobre que precisará enfrentar desafios ainda maiores para impedir ameaças capazes de colocar o mundo em 
-risco. Durante sua jornada, Percy precisa lidar com batalhas, profecias e missões perigosas enquanto tenta recuperar suas memórias e entender seu verdadeiro papel dentro daquele 
-universo mitológico. A história mistura aventura, fantasia, ação e amizade, expandindo ainda mais o universo dos semideuses.'
-WHERE idLivro = '4';
-
-
--- +4
-UPDATE livros
-SET resumo = 'Percy Jackson acreditava que teria um ano escolar tranquilo, mas logo percebe que novos perigos começam a surgir ao seu redor. Quando acontecimentos estranhos 
-passam a ameaçar o equilíbrio entre o mundo humano e o universo mitológico, Percy é novamente levado para uma jornada cheia de criaturas lendárias, batalhas perigosas e revelações 
-importantes. Ao lado de seus amigos, ele precisará enfrentar desafios cada vez maiores enquanto descobre mais sobre seu destino como semideus. A narrativa mistura aventura, humor e 
-ação constante dentro do universo da mitologia grega.'
-WHERE idLivro = 5;
-
-UPDATE livros
-SET resumo = 'Em uma pequena cidade marcada por acontecimentos estranhos e memórias traumáticas, uma mulher retorna para lidar com segredos que ficaram enterrados por muitos anos. 
-Conforme novas descobertas surgem, o passado começa a se conectar com eventos perturbadores do presente, trazendo à tona mistérios envolvendo desaparecimentos, mentiras e relações 
-familiares complexas. A narrativa cria uma atmosfera sombria e psicológica, mantendo a tensão constante enquanto diferentes peças da história começam a se encaixar.'
-WHERE idLivro = 6;
-
-UPDATE livros
-SET resumo = 'Sophie é uma jovem que leva uma vida simples até ser vítima de uma maldição que transforma completamente sua aparência. Em busca de uma solução, ela acaba encontrando 
-o misterioso castelo ambulante de Howl, um mago conhecido tanto por sua fama excêntrica quanto pelos rumores espalhados a seu respeito. Conforme passa a conviver naquele ambiente 
-mágico, Sophie descobre segredos, constrói novas relações e enfrenta situações inesperadas envolvendo magia, guerras e autodescoberta. A obra combina fantasia, aventura e momentos 
-leves de forma encantadora.'
-WHERE idLivro = 7;
-
-UPDATE livros
-SET resumo = 'A detetive Jane Rizzoli e a legista Maura Isles investigam uma sequência de crimes brutais que parecem seguir padrões extremamente calculados. Conforme o caso avança, 
-as duas percebem que estão lidando com um assassino inteligente e perigoso, capaz de manipular pistas e desafiar constantemente a investigação policial. A narrativa mergulha em um 
-suspense intenso, explorando tensão psicológica, investigações detalhadas e o impacto emocional causado pelos crimes. Cada descoberta aproxima ainda mais as protagonistas de uma verdade assustadora.'
-WHERE idLivro = 8;
-
--- +4
-UPDATE livros
-SET resumo = 'Greg Heffley embarca em uma viagem de carro com sua família, acreditando que talvez as férias possam ser divertidas. No entanto, o passeio rapidamente se transforma em uma 
-sequência de situações caóticas, imprevistos exagerados e conflitos familiares típicos do universo de Diário de um Banana. Entre paradas desastrosas, planos que dão errado e momentos 
-constrangedores, a história aposta no humor cotidiano e nas confusões de uma família tentando transformar uma viagem comum em uma grande aventura.'
-WHERE idLivro = 9;
-
-UPDATE livros
-SET resumo = 'Em uma sociedade dividida em distritos e controlada por um governo autoritário, jovens são escolhidos para participar de uma competição mortal transmitida como entretenimento 
-para toda a população. Katniss Everdeen se vê envolvida nesse sistema cruel e precisa enfrentar desafios físicos, emocionais e estratégicos para sobreviver. A história mistura ação, crítica 
-social e tensão constante, apresentando um universo marcado por desigualdade, controle político e resistência.'
-WHERE idLivro = 10;
-
-UPDATE livros
-SET resumo = 'Dez pessoas são convidadas para uma ilha isolada sob diferentes pretextos, mas logo percebem que há algo estranho por trás daquele encontro. Sem contato com o mundo exterior, os 
-convidados começam a ser confrontados por acusações ligadas ao passado, enquanto acontecimentos cada vez mais assustadores tornam o ambiente sufocante. A narrativa constrói um mistério clássico 
-e envolvente, explorando desconfiança, culpa e medo em um cenário fechado onde todos parecem esconder alguma coisa.'
-WHERE idLivro = 11;
-
-UPDATE livros
-SET resumo = 'Quando um estudante morre durante uma detenção escolar, os outros jovens presentes passam a ser vistos como suspeitos. Cada um deles guarda segredos que poderiam mudar a 
-forma como são vistos pelos colegas, pela escola e pela polícia. Conforme a investigação avança, versões diferentes começam a surgir, revelando conflitos, mentiras e pressões típicas da 
-adolescência. A história combina suspense juvenil, mistério policial e drama escolar, mantendo a dúvida sobre o que realmente aconteceu.'
-WHERE idLivro = 12;
-
--- +6
-UPDATE livros
-SET resumo = 'Shinji Ikari é chamado para pilotar uma unidade gigante chamada Evangelion em meio a ataques de seres misteriosos conhecidos como Anjos. Enquanto tenta entender seu papel
- nesse conflito, ele se vê cercado por outros pilotos, decisões difíceis e uma organização cheia de segredos. A obra mistura ficção científica, ação e drama psicológico, explorando temas
- como medo, solidão, responsabilidade e amadurecimento dentro de um cenário intenso e cheio de tensão.'
-WHERE idLivro = 13;
-
-UPDATE livros
-SET resumo = 'Light Yagami é um estudante brilhante que encontra um caderno capaz de matar qualquer pessoa cujo nome seja escrito nele. A partir dessa descoberta, ele passa a usar o objeto
- para tentar criar um mundo de acordo com sua própria visão de justiça. No entanto, suas ações chamam a atenção de investigadores, dando início a um jogo intelectual cheio de estratégias, 
- suspeitas e disputas morais. A obra combina suspense psicológico, investigação e tensão constante.'
-WHERE idLivro = 14;
-
-UPDATE livros
-SET resumo = 'Gon Freecss é um garoto determinado que decide se tornar Hunter para seguir os passos de seu pai e descobrir mais sobre o mundo ao seu redor. Durante sua jornada, ele conhece 
-aliados importantes e enfrenta provas perigosas que exigem coragem, inteligência e força. A história apresenta um universo vasto, cheio de criaturas, desafios e regras próprias, misturando 
-aventura, ação, amizade e momentos de grande tensão.'
-WHERE idLivro = 15;
-
-UPDATE livros
-SET resumo = 'Shoyo Hinata é um estudante apaixonado por vôlei que, mesmo sendo mais baixo que muitos jogadores, sonha em se destacar nas quadras. Ao entrar para o clube de vôlei da escola 
-Karasuno, ele precisa aprender a trabalhar em equipe, lidar com rivalidades e superar suas próprias limitações. A obra acompanha treinos, partidas e o crescimento dos personagens, trazendo 
-uma narrativa cheia de energia, esforço, amizade e competitividade.'
-WHERE idLivro = 16;
-
-UPDATE livros
-SET resumo = 'A história acompanha uma investigação marcada pelo desaparecimento de mulheres e por segredos que parecem se esconder atrás de uma rotina aparentemente comum. Conforme novas 
-pistas surgem, a narrativa constrói uma atmosfera de suspense e tensão, explorando o impacto emocional dos crimes e a complexidade das relações envolvidas. A obra mistura investigação, 
-mistério e drama, mantendo o leitor atento aos detalhes enquanto a verdade vai sendo revelada aos poucos.'
-WHERE idLivro = 17;
-
-UPDATE livros
-SET resumo = 'Em um mundo onde a humanidade vive protegida por enormes muralhas, a ameaça dos titãs domina o medo e a sobrevivência das pessoas. Eren Yeager, ao lado de seus amigos, sonha em 
-conhecer o mundo além das muralhas, mas sua vida muda quando essa segurança começa a ruir. A obra mistura ação, mistério, fantasia sombria e drama, construindo um universo intenso sobre 
-liberdade, perda, sobrevivência e conflitos cada vez maiores.'
-WHERE idLivro = 18;
-
--- Opinões
-UPDATE livros
-SET opiniao = 'Eu gostei bastante desse livro porque ele me deixou muito imersa na história e eu fiquei o tempo todo querendo descobrir o que tinha acontecido. O suspense dele é muito bom 
-e tem alguns momentos que realmente dão uma sensação estranha e tensa. Também gostei bastante dos personagens e do plot, porque eu realmente não esperava. A única coisa que me incomodou foi 
-o fato de o livro ser relativamente pequeno, então senti que faltou aprofundar algumas coisas e explicar melhor certos detalhes. Minha nota para ele foi 7,5.'
+SET resumo = 'Em uma cidade cheia de segredos, um grupo de amigos usa desenhos de giz como brincadeira, até que esses símbolos passam a se ligar a acontecimentos perturbadores. Anos depois, 
+o passado volta a assombrá-los, misturando suspense, memória e mistério.',
+    nota = 7.5
 WHERE idLivro = 1;
 
 UPDATE livros
-SET opiniao = 'Gostei bastante desse livro, principalmente porque ele foi um dos primeiros livros de investigação mais recentes que eu li. A leitura é muito envolvente e eu gostei bastante 
-da forma como a investigação acontece. Durante a história eu fiquei tentando descobrir quem era o culpado e, mesmo desconfiando de algumas coisas, a forma como tudo aconteceu conseguiu me 
-surpreender. Também gostei muito dos personagens e do ritmo da história. Minha nota para ele foi 8,5.'
+SET resumo = 'Pip decide investigar um crime antigo que todos acreditam já estar resolvido. Ao revisitar provas, entrevistas e versões diferentes da história, ela percebe que sua cidade guarda 
+mais segredos do que aparenta.',
+    nota = 8.5
 WHERE idLivro = 2;
 
 UPDATE livros
-SET opiniao = 'Esse foi o primeiro livro que eu li da Tess Gerritsen e eu simplesmente me apaixonei pela escrita dela. De todos os livros de investigação que eu já li, os dela sempre são os 
-que mais conseguem me prender, porque parece que a gente realmente está acompanhando uma investigação policial de verdade. Os detalhes são muito bons e as reviravoltas conseguem me surpreender 
-sempre. Nesse livro específico, eu gostei muito da forma como ela mistura investigação com elementos ligados à Igreja Católica, porque deixou a história ainda mais interessante. Também gostei 
-muito das protagonistas e da dinâmica entre elas. Sinceramente, eu só queria que o livro fosse ainda maior porque eu fiquei completamente imersa na história. Minha nota para ele é 9,5.'
+SET resumo = 'Jane Rizzoli e Maura Isles investigam um caso marcado por crimes, desaparecimentos e segredos familiares. Conforme novas pistas aparecem, a investigação ganha um clima cada vez 
+mais tenso e cheio de reviravoltas.',
+    nota = 9.5
 WHERE idLivro = 3;
 
 UPDATE livros
-SET opiniao = 'Eu li esse livro há muitos anos e reli depois de um tempo, então ele acaba sendo bem marcante para mim. Gostei muito porque ele mostra o Percy em uma fase diferente da primeira 
-saga e traz vários elementos novos envolvendo os deuses romanos, o que deixou a história muito interessante. Também gostei bastante dos novos personagens, dos enigmas e do amadurecimento do 
-Percy ao longo da história. Foi um livro que me deixou muito curiosa para continuar a saga e descobrir o que iria acontecer depois. Minha nota para ele é 8,5.'
+SET resumo = 'Percy Jackson desperta sem lembrar totalmente de seu passado e acaba envolvido em uma nova missão ligada ao universo dos semideuses. A história mistura mitologia, aventura, 
+amizade e descobertas sobre seu papel nesse novo cenário.',
+    nota = 8.5
 WHERE idLivro = 4;
 
 UPDATE livros
-SET opiniao = 'Eu gosto muito desse livro, porque ele é o meu infantojuvenil favorito. Foi uma das primeiras histórias mais completas que eu li depois de Diário de um Banana, então ele também 
-tem uma importância grande para mim como leitora. Sou apaixonada pelos personagens e pela forma como a história mistura mitologia grega com aventura, humor e momentos de tensão. É um livro que, 
-mesmo sendo infantojuvenil, eu acho que funciona em qualquer idade, porque o universo é muito divertido e cheio de histórias interessantes. A escrita é leve, engraçada e prende muito. Minha nota 
-para ele é 9.'
+SET resumo = 'Percy Jackson descobre que é um semideus e passa a enfrentar criaturas mitológicas, profecias e perigos ligados aos deuses gregos. A aventura apresenta um universo cheio de 
+humor, ação e descobertas fantásticas.',
+    nota = 9.0
 WHERE idLivro = 5;
 
 UPDATE livros
-SET opiniao = 'Esse livro tem uma pegada muito parecida com O Homem de Giz, então novamente a escrita da autora conseguiu me prender muito. A história é bem pesada e teve momentos que realmente 
-me deixaram assustada, porque tudo parece muito realista. Foi um livro que mexeu bastante comigo em alguns momentos e me deixou muito imersa na tensão da história. A única coisa que me incomodou 
-foi o fato de ele ser relativamente curto, então algumas coisas ficaram meio abertas e eu gostaria que tivessem aprofundado mais certos detalhes. Mesmo assim, achei a história muito boa e o suspense 
-funciona muito bem. Minha nota para ele é 8,5.'
+SET resumo = 'Uma mulher retorna a uma cidade marcada por memórias difíceis e segredos antigos. Aos poucos, acontecimentos estranhos do presente começam a se conectar com o passado, criando 
+uma atmosfera sombria e cheia de tensão.',
+    nota = 8.5
 WHERE idLivro = 6;
 
 UPDATE livros
-SET opiniao = 'Eu fui ler esse livro depois de reassistir o filme no cinema e sinceramente foi uma experiência muito boa. O livro é bem leve, divertido e muito engraçadinho em vários momentos. 
-Os personagens são extremamente carismáticos e eu gostei muito da relação entre a Sophie e o Howl, porque as interações deles são muito divertidas. Além da história ser muito boa, o próprio livro 
-é lindo visualmente, então isso também deixou a leitura ainda mais gostosa. É uma leitura bem confortável e divertida, daquelas que fazem a gente simplesmente aproveitar a história. Minha nota 
-para ele é 9.'
+SET resumo = 'Sophie é transformada por uma maldição e acaba encontrando o castelo ambulante de Howl. Em meio a magia, guerras e descobertas pessoais, ela vive uma aventura leve, divertida 
+e cheia de personagens encantadores.',
+    nota = 9.0
 WHERE idLivro = 7;
 
 UPDATE livros
-SET opiniao = 'Esse foi um dos livros mais recentes que eu li dessa lista e também é o primeiro da saga da Jane Rizzoli. Mais uma vez, a escrita da Tess Gerritsen me prendeu muito, porque 
-parece que a gente está investigando junto com os detetives. O caso é muito interessante e o assassino é extremamente inteligente, então você nunca sabe qual vai ser o próximo passo dele. 
-Em vários momentos eu fiquei frustrada junto com os personagens, tentando entender o que estava acontecendo. Para quem gosta de suspense e investigação, é uma leitura muito boa. Minha nota 
- para ele é 9.'
+SET resumo = 'Jane Rizzoli investiga uma sequência de crimes brutais cometidos por alguém inteligente e calculista. A cada pista, o caso se torna mais perigoso, misturando suspense 
+policial, tensão psicológica e investigação intensa.',
+    nota = 9.0
 WHERE idLivro = 8;
 
 UPDATE livros
-SET opiniao = 'Esse livro é muito especial para mim porque foi o primeiro que eu li na vida e teve muita importância para eu começar a gostar de leitura. Eu era criança quando li, então 
-talvez eu não lembre de todos os detalhes, mas lembro bem de me divertir muito com a viagem em família do Greg. É uma leitura leve, engraçada e muito boa para crianças que estão começando 
-a criar o hábito de ler. Foi por causa dele que eu tive vontade de conhecer os outros livros da série. Minha nota para ele é 8.'
+SET resumo = 'Greg Heffley sai em uma viagem de carro com a família, mas o passeio logo vira uma sequência de confusões. A história aposta no humor, em situações exageradas e nos conflitos 
+divertidos de uma família em férias.',
+    nota = 8.0
 WHERE idLivro = 9;
 
 UPDATE livros
-SET opiniao = 'Esse foi um dos primeiros livros de distopia que eu li e eu gosto muito tanto do livro quanto dos filmes. Acho a história muito interessante porque, por trás daquele mundo 
-mais extremo e fictício, existe uma crítica social muito forte sobre desigualdade, poder e controle. É uma leitura com bastante ação e tensão, mas também é um pouco pesada em alguns momentos, 
-principalmente pelos temas que aborda. Gosto muito da protagonista e da forma como a gente consegue sentir o que ela vive e enfrenta ao longo da história. Minha nota para ele é 9.'
+SET resumo = 'Em uma sociedade controlada por um governo autoritário, Katniss Everdeen é levada a participar de uma competição mortal. A história mistura ação, tensão e crítica social 
+em um mundo marcado por desigualdade e controle.',
+    nota = 9.0
 WHERE idLivro = 10;
 
 UPDATE livros
-SET opiniao = 'Eu gostei bastante desse livro porque ele tem uma ideia muito criativa. A forma como a história vai seguindo a cantiga infantil enquanto as coisas acontecem deixa tudo mais 
-interessante e dá uma tensão muito boa durante a leitura. Os livros da Agatha Christie normalmente têm plots bem diferentes e esse foi um dos que mais me prenderam pela curiosidade de entender 
-o que realmente estava acontecendo. A escrita também é muito boa e faz a leitura fluir bastante. Minha nota para ele é 8,5.'
+SET resumo = 'Dez pessoas são convidadas para uma ilha isolada e logo percebem que há algo errado naquele encontro. Sem contato com o mundo exterior, acusações e mortes misteriosas 
+transformam o lugar em um cenário de medo e desconfiança.',
+    nota = 8.5
 WHERE idLivro = 11;
 
 UPDATE livros
-SET opiniao = 'Eu gosto bastante desse livro, mas não acho ele um suspense extremamente incrível ou muito difícil de descobrir. Ainda assim, é uma leitura bem divertida e leve para quem quer 
-algo mais adolescente, mas que continue tendo mistério e suspense. Tem alguns momentos meio “besteirol”, mas isso também faz parte da proposta dele. Foi um livro que eu gostei de ler justamente 
-porque é mais descontraído e fácil de acompanhar. Minha nota para ele é 7.'
+SET resumo = 'Quando um estudante morre durante uma detenção escolar, os outros jovens presentes viram suspeitos. A investigação revela segredos, conflitos e mentiras, misturando 
+suspense adolescente com mistério policial.',
+    nota = 7.0
 WHERE idLivro = 12;
 
 UPDATE livros
-SET opiniao = 'Evangelion é um mangá bem misterioso e diferente do que eu costumo ler. A história é muito interessante e consegue te deixar imersa, mas ao mesmo tempo é um pouco pesada e até 
-difícil de entender em alguns momentos, porque tem muita coisa acontecendo. Mesmo assim, eu gostei bastante da experiência e achei o enredo bem marcante. Minha nota para ele é 8,5.'
+SET resumo = 'Shinji Ikari é chamado para pilotar uma unidade Evangelion contra seres misteriosos chamados Anjos. A obra mistura ação, ficção científica e drama psicológico em uma história 
+cheia de tensão e simbolismos.',
+    nota = 8.5
 WHERE idLivro = 13;
 
 UPDATE livros
-SET opiniao = 'Death Note foi um dos primeiros mangás que eu li e também assisti em anime, então ele é bem marcante para mim. Gosto muito da disputa entre o L e o Light, principalmente porque 
-a história faz a gente tomar um lado, e eu sempre fui Team L. Além disso, acho os personagens ótimos e gosto da crítica social que aparece na obra. É uma história inteligente, tensa e com alguns 
-momentos bem divertidos também. Minha nota para ele é 9.'
+SET resumo = 'Light Yagami encontra um caderno capaz de matar pessoas e passa a usá-lo para impor sua própria ideia de justiça. A partir disso, começa um jogo intelectual intenso entre 
+ele e investigadores determinados a pará-lo.',
+    nota = 9.0
 WHERE idLivro = 14;
 
-
 UPDATE livros
-SET opiniao = 'Hunter x Hunter é simplesmente o meu mangá favorito. Eu gosto muito da história, dos personagens e principalmente dos arcos, porque acho tudo muito bem construído. O Gon é um 
-protagonista que eu gosto bastante de acompanhar e eu sempre ficava ansiosa para ver o que iria acontecer depois. Além disso, os personagens são muito carismáticos e a obra consegue equilibrar 
-momentos leves com partes mais pesadas muito bem. Meu único ponto triste é o fato da história provavelmente nunca ter um final completo, porque é realmente uma obra incrível. Minha nota para ele é 10.'
+SET resumo = 'Gon Freecss decide se tornar Hunter para encontrar seu pai e conhecer melhor o mundo. Em sua jornada, faz amigos, enfrenta provas perigosas e descobre um universo cheio de 
+regras, aventuras e personagens marcantes.',
+    nota = 10.0
 WHERE idLivro = 15;
 
 UPDATE livros
-SET opiniao = 'Haikyuu é um dos meus mangás favoritos e, para mim, é um dos melhores animes de esporte que existem. Eu gosto muito dos personagens porque eles são extremamente carismáticos e 
-engraçados, então é impossível não se apegar a eles. O desenvolvimento do Hinata ao longo da história é muito bom e os jogos conseguem ser emocionantes mesmo para quem não entende tanto de vôlei. 
-É uma obra muito divertida, leve e empolgante ao mesmo tempo. Minha nota para ele é 10.'
+SET resumo = 'Hinata sonha em se destacar no vôlei mesmo sendo mais baixo que muitos jogadores. Ao entrar no time da Karasuno, ele aprende sobre esforço, trabalho em equipe, rivalidade e 
+crescimento dentro das quadras.',
+    nota = 10.0
 WHERE idLivro = 16;
 
 UPDATE livros
-SET opiniao = 'De todos os livros da saga da Jane Rizzoli que eu li até agora, esse foi o meu favorito. A história é muito pesada em vários momentos e me deixou realmente agoniada junto com os 
-personagens. A escrita da Tess Gerritsen continua incrível e a investigação consegue prender muito do começo ao fim. É um livro que eu considero mais forte e que talvez precise de um pouco mais 
-de estômago para ler, mas ao mesmo tempo é extremamente bem construído. Minha nota para ele é 10.'
+SET resumo = 'A história acompanha uma investigação envolvendo desaparecimentos de mulheres e segredos difíceis de encarar. Com clima pesado e muita tensão, a narrativa mistura suspense, 
+drama e uma busca angustiante por respostas.',
+    nota = 10.0
 WHERE idLivro = 17;
 
 UPDATE livros
-SET opiniao = 'Attack on Titan é facilmente um dos meus animes e mangás favoritos. A história é absurda de boa e consegue surpreender o tempo inteiro com plot atrás de plot. O mais impressionante 
-é que várias pistas ficam espalhadas durante a história e, mesmo assim, a maioria das revelações consegue pegar a gente completamente de surpresa. Além disso, gosto muito das críticas sociais 
-presentes na obra e do fato dos personagens serem tão complexos, principalmente o Eren, que é um protagonista extremamente polêmico. É uma obra muito marcante e muito bem construída. Minha nota 
-para ele é 10.'
+SET resumo = 'Em um mundo protegido por muralhas, a humanidade vive ameaçada pelos titãs. Eren Yeager e seus amigos enfrentam perdas, mistérios e conflitos que transformam a busca por 
+liberdade em uma história cada vez mais intensa.',
+    nota = 10.0
 WHERE idLivro = 18;
-SELECT * FROM livros;
+
+-- Resumos, opiniões e notas atualizadas
+UPDATE livros
+SET resumo = 'Um grupo de amigos de infância passa a se comunicar por desenhos feitos com giz, até que a brincadeira se liga a uma descoberta assustadora. Anos depois, novos símbolos apare
+cem e fazem o passado voltar com força, revelando segredos, traumas e dúvidas que nunca foram totalmente resolvidos.',
+    opiniao = 'Eu gostei bastante porque o livro me deixou muito imersa e curiosa para entender o que tinha acontecido. O suspense funciona muito bem e o plot me surpreendeu. Só senti falt
+    a de mais detalhes, porque algumas coisas ficaram abertas demais para um livro tão curto.',
+    nota = 7.5
+WHERE idLivro = 1;
+
+UPDATE livros
+SET resumo = 'Pip Fitz-Amobi decide investigar um caso antigo de assassinato que marcou sua cidade. Mesmo todos acreditando que a história já estava resolvida, ela começa a encontrar detalhes estranhos, versões mal explicadas e segredos escondidos, transformando o trabalho escolar em uma investigação perigosa.',
+    opiniao = 'Foi um dos primeiros livros de investigação mais recentes que eu li e eu gostei bastante. A leitura prende, os personagens são cativantes e, mesmo eu desconfiando de algumas coisas, a forma como tudo aconteceu conseguiu me surpreender.',
+    nota = 8.5
+WHERE idLivro = 2;
+
+UPDATE livros
+SET resumo = 'Jane Rizzoli e Maura Isles investigam um caso cheio de marcas estranhas, mortes violentas e conexões com segredos antigos. Conforme a investigação avança, o passado de algumas pessoas começa a se misturar com o presente, criando uma trama de suspense intensa e cheia de reviravoltas.',
+    opiniao = 'Esse foi o primeiro livro que li da Tess Gerritsen e eu me apaixonei pela escrita dela. Parece que a gente está investigando junto com os personagens. Gostei muito dos detalhes, das protagonistas e da mistura entre investigação e elementos ligados à Igreja Católica.',
+    nota = 9.5
+WHERE idLivro = 3;
+
+UPDATE livros
+SET resumo = 'Percy Jackson acorda sem lembrar completamente de quem é e acaba em um novo acampamento, ligado à mitologia romana. Ao lado de novos aliados, ele precisa enfrentar missões perigosas, criaturas mitológicas e pistas sobre seu passado, enquanto tenta entender seu papel nessa nova fase.',
+    opiniao = 'Eu li esse livro há muitos anos e depois reli, então ele é bem marcante para mim. Gosto muito de ver o Percy em outra fase, com novos personagens e elementos romanos. É uma continuação interessante e me deixou com vontade de seguir a saga.',
+    nota = 8.5
+WHERE idLivro = 4;
+
+UPDATE livros
+SET resumo = 'Percy Jackson descobre que é filho de Poseidon e passa a fazer parte de um mundo escondido de deuses, monstros e semideuses. Em sua primeira grande missão, ele precisa atravessar os Estados Unidos com seus amigos para impedir um conflito entre os deuses do Olimpo.',
+    opiniao = 'Esse é o meu livro infantojuvenil favorito. Amo os personagens, o humor e a forma como a história mistura mitologia grega com aventura. Mesmo sendo voltado para um público mais jovem, acho que funciona em qualquer idade porque o universo é muito divertido.',
+    nota = 9.0
+WHERE idLivro = 5;
+
+UPDATE livros
+SET resumo = 'Uma mulher retorna a uma cidade marcada por lembranças perturbadoras e acontecimentos mal explicados. Aos poucos, o passado começa a se conectar com novos mistérios, criando uma atmosfera sombria, psicológica e cheia de tensão, em que nem tudo parece estar totalmente enterrado.',
+    opiniao = 'Esse livro tem uma pegada parecida com O Homem de Giz, mas me pareceu ainda mais macabro em alguns momentos. A escrita prende muito e algumas cenas realmente me deixaram assustada. Só queria que certos pontos tivessem sido mais aprofundados.',
+    nota = 8.5
+WHERE idLivro = 6;
+
+UPDATE livros
+SET resumo = 'Sophie leva uma vida simples até ser atingida por uma maldição e sair em busca de uma solução. No caminho, ela encontra o castelo ambulante de Howl, um lugar cheio de magia, personagens excêntricos e situações inesperadas que transformam sua visão sobre si mesma.',
+    opiniao = 'Eu fui ler depois de reassistir o filme no cinema e adorei a experiência. O livro é leve, divertido e muito fofo. Gosto muito da relação entre Sophie e Howl, dos personagens e também da edição, que deixa a leitura ainda mais gostosa.',
+    nota = 9.0
+WHERE idLivro = 7;
+
+UPDATE livros
+SET resumo = 'Jane Rizzoli investiga uma sequência de crimes brutais cometidos por alguém extremamente calculista. Enquanto tenta entender o padrão do assassino, ela precisa lidar com pistas difíceis, tensão crescente e uma investigação que parece sempre estar um passo atrás do criminoso.',
+    opiniao = 'Foi um dos livros mais recentes que li e a escrita da Tess Gerritsen continua perfeita para suspense. O caso é muito bom e o assassino é inteligente, então eu fiquei frustrada junto com os detetives tentando entender tudo. Para quem gosta de investigação, funciona muito.',
+    nota = 9.0
+WHERE idLivro = 8;
+
+UPDATE livros
+SET resumo = 'Greg Heffley sai em uma viagem de carro com sua família, mas o passeio logo vira uma sequência de confusões. Entre planos dando errado, momentos constrangedores e situações exageradas, a história transforma uma viagem comum em uma aventura familiar cheia de humor.',
+    opiniao = 'Esse livro é especial porque foi o primeiro que eu li na vida e ajudou muito a criar meu hábito de leitura. Eu era criança, então não lembro de tudo, mas lembro de rir bastante. É uma leitura leve e ótima para quem está começando a ler.',
+    nota = 8.0
+WHERE idLivro = 9;
+
+UPDATE livros
+SET resumo = 'Em uma sociedade dividida em distritos e controlada pela Capital, Katniss Everdeen é levada para uma competição mortal transmitida como espetáculo. A história mistura sobrevivência, tensão e crítica social, mostrando um mundo marcado por desigualdade, controle político e resistência.',
+    opiniao = 'Foi uma das primeiras distopias que li e eu gosto muito tanto do livro quanto dos filmes. Acho interessante como a história cria um mundo extremo, mas ainda assim cheio de críticas sobre desigualdade e poder. É uma leitura intensa e com bastante ação.',
+    nota = 9.0
+WHERE idLivro = 10;
+
+UPDATE livros
+SET resumo = 'Dez pessoas são convidadas para uma ilha isolada e logo percebem que há algo errado naquele encontro. Sem contato com o exterior, cada convidado passa a ser confrontado por acusações do passado, enquanto acontecimentos assustadores seguem o ritmo de uma antiga cantiga infantil.',
+    opiniao = 'Eu gostei bastante da criatividade desse livro. A ideia da cantiga guiando os acontecimentos deixa tudo mais tenso e interessante. A Agatha Christie tem histórias muito inusitadas, e esse livro prende justamente pela curiosidade de entender como tudo vai se encaixar.',
+    nota = 8.5
+WHERE idLivro = 11;
+
+UPDATE livros
+SET resumo = 'Cinco estudantes entram em uma detenção escolar, mas apenas quatro saem vivos. A partir disso, todos viram suspeitos e segredos começam a aparecer. A história mistura suspense adolescente, drama escolar e investigação, mostrando como cada personagem escondia algo importante.',
+    opiniao = 'Eu gosto desse livro, mas não acho ele um suspense grandioso ou muito difícil de desvendar. Ainda assim, ele é divertido e funciona bem para quando quero algo mais leve, adolescente e com mistério. É uma leitura simples, mas gostosa de acompanhar.',
+    nota = 7.0
+WHERE idLivro = 12;
+
+UPDATE livros
+SET resumo = 'Shinji Ikari é chamado para pilotar uma unidade Evangelion em meio aos ataques de seres misteriosos chamados Anjos. A história mistura ficção científica, ação e drama psicológico, mostrando conflitos internos, relações difíceis e muitos segredos por trás da organização que conduz as batalhas.',
+    opiniao = 'Evangelion é bem misterioso e diferente do que eu costumo ler. A história prende, mas também é pesada e um pouco difícil de entender em alguns momentos. Mesmo com essa complexidade, achei o enredo marcante e gostei bastante da experiência.',
+    nota = 8.5
+WHERE idLivro = 13;
+
+UPDATE livros
+SET resumo = 'Light Yagami encontra um caderno capaz de matar qualquer pessoa cujo nome seja escrito nele. A partir disso, ele tenta criar um mundo baseado na própria ideia de justiça, enquanto passa a ser investigado por L, dando início a uma disputa cheia de estratégia.',
+    opiniao = 'Death Note foi um dos primeiros mangás que li e também assisti em anime, então é bem marcante para mim. Gosto muito da disputa entre Light e L, principalmente porque a história faz a gente tomar um lado. Eu sempre fui Team L.',
+    nota = 9.0
+WHERE idLivro = 14;
+
+UPDATE livros
+SET resumo = 'Gon Freecss decide se tornar Hunter para encontrar seu pai e descobrir mais sobre o mundo. Durante a jornada, ele conhece amigos importantes, enfrenta provas perigosas e entra em um universo cheio de regras próprias, criaturas estranhas, poderes complexos e arcos muito diferentes entre si.',
+    opiniao = 'Hunter x Hunter é simplesmente o meu mangá favorito. Amo os personagens, os arcos e a forma como a história é construída. O Gon é muito bom de acompanhar e eu sempre ficava ansiosa pelas conquistas dele. Só fico triste por provavelmente nunca ter um final completo.',
+    nota = 10.0
+WHERE idLivro = 15;
+
+UPDATE livros
+SET resumo = 'Hinata sonha em se destacar no vôlei mesmo sendo mais baixo que muitos jogadores. Ao entrar no Karasuno, ele precisa aprender a trabalhar em equipe, lidar com rivalidades e evoluir dentro da quadra, em uma história cheia de treinos, partidas e crescimento pessoal.',
+    opiniao = 'Haikyuu é um dos meus favoritos e, para mim, é elite dos animes de esporte. Os personagens são muito carismáticos e engraçados, o desenvolvimento do Hinata é ótimo e os jogos conseguem ser emocionantes mesmo para quem não entende tanto de vôlei.',
+    nota = 10.0
+WHERE idLivro = 16;
+
+UPDATE livros
+SET resumo = 'Jane Rizzoli e Maura Isles se envolvem em uma investigação marcada pelo desaparecimento de mulheres e por uma rede de segredos assustadora. A trama tem um tom mais pesado, com tensão constante e descobertas que tornam o caso cada vez mais perturbador.',
+    opiniao = 'De todos os livros da saga da Jane Rizzoli que li até agora, esse foi o meu favorito. A história é mais pesada e me deixou agoniada junto com os personagens. É um livro que exige mais estômago, mas é extremamente bem construído.',
+    nota = 10.0
+WHERE idLivro = 17;
+
+UPDATE livros
+SET resumo = 'Em um mundo cercado por enormes muralhas, a humanidade vive sob a ameaça dos titãs. Eren Yeager e seus amigos sonham em conhecer o que existe além daquela proteção, mas essa busca 
+por liberdade revela perdas, mistérios e conflitos cada vez mais complexos.',
+    opiniao = 'Attack on Titan está no meu top 3 de animes e mangás. A história surpreende o tempo inteiro com plot atrás de plot, e muitas pistas estavam ali desde o começo. Gosto muito das 
+    críticas sociais e da complexidade do Eren.',
+    nota = 10.0
+WHERE idLivro = 18;
+
 
 -- INSERTS PARA TESTES
 INSERT INTO usuario (nomeCompleto, email, senha) VALUES
@@ -347,6 +336,7 @@ GROUP BY favoritos.fkLivro, livros.titulo, livros.autor, livros.imagem
 ORDER BY qtdFavoritos DESC
 LIMIT 1;
 
+        SELECT * from livros;
 
 -- Gênero mais favoritado em geral
 SELECT 
@@ -396,8 +386,5 @@ JOIN livros ON favoritos.fkLivro = livros.idLivro
 WHERE favoritos.fkUsuario = 1
 ORDER BY favoritos.dtFavoritado DESC
 LIMIT 5;
-
-
-
 
 SELECT * FROM usuario;

@@ -9,7 +9,7 @@
 
 .container {
     width: 100%;
-    min-height: 180vh;
+    min-height: 100vh;
     background-color: #F5F1E8;
 
     display: flex;
@@ -21,7 +21,9 @@
 
     .container-principal {
         width: 90%;
-        min-height: 165vh;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
         /* background-color: #CE8787; */
     }
 }
@@ -214,11 +216,12 @@
         height: 280px;
         background-color: #F5F1E8;
         border-radius: 8px;
-        border: 2px solid #C9A96E;
+        border: 1px solid #C9A96E;
         position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
+        box-shadow: 0 4px 10px #00000023;
         gap: 25px;
 
         img {
@@ -261,6 +264,14 @@
                 left: 55px;
             }
 
+            .coracao-card-2 {
+                position: absolute;
+                width: 180px;
+                /* background-color: #6ec9bb; */
+                top: -55px;
+                left: 70px;
+            }
+
             .titulo-card {
                 width: 130px;
                 margin-left: 20px;
@@ -297,12 +308,15 @@
                 font-size: 0.95rem;
                 font-family: 'Libre Baskerville', serif;
                 cursor: pointer;
+                position: relative;
+                z-index: 10;
 
                 img {
                     position: absolute;
                     top: 145px;
                     right: 100px;
                     width: 90px;
+                    cursor: pointer;
                 }
             }
         }
@@ -342,7 +356,8 @@
             font-family: 'Libre Baskerville', serif;
             font-size: 1rem;
         }
-        img{
+
+        img {
             padding-left: 18px;
         }
     }
@@ -359,7 +374,7 @@
         left: -5px;
         top: 220px;
     }
-    
+
 
     .flor-2 {
         position: absolute;
@@ -590,7 +605,7 @@
 }
 
 .footer {
-    /* margin-top: 80px; */
+    margin-top: auto;
     width: 100%;
     height: 460px;
     display: flex;

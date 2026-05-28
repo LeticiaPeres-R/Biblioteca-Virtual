@@ -28,6 +28,7 @@
                     <a href="./biblioteca.html">Biblioteca</a>
                     <a href="./favoritos.html">Favoritos</a>
                     <a href="./index.html#id_banner">Sobre</a>
+                    <a href="./dashboard.html" id="dash_btn" style="display: none;">Dashboard</a>
                 </div>
                 <div class="elemento-nav-3">
                     <div style="display: none;" id="botoes_deslogado" class="botoes_deslogado">
@@ -90,6 +91,7 @@
         </div>
     </div>
     </div>
+    <!--     
     <script>
         function listarLivros() {
             fetch("http://localhost:3333/livros/listar"
@@ -114,15 +116,15 @@
                     ${livro.autor}
                 </span>
                 <img src="./img/icon-linha-cards.png" alt="" class="linha-card">
-                <button onclick="RedirecionarDetalhes(${livro.idLivro})" class="btn-amostra">
-                    <img src="./img/icon-pin3.png" alt="">
-                    Detalhes
-                </button>
-            </div>
-        </div>
-                `
+                    <button onclick="RedirecionarDetalhes(${livro.idLivro})" class="btn-amostra">
+                        Detalhes
+                    </button>
+                    </div>
+                </div>
+                    `
                 }
-
+                
+                // <img src="./img/icon-pin3.png">
                 container_livros.innerHTML = container
             })
 
@@ -144,7 +146,7 @@
             window.location = "./cadastro.html"
         }
         function RedirecionarDetalhes(id) {
-            console.log()
+            console.log(id)
             sessionStorage.setItem("ID_LIVRO", id);
             window.location = "./detalhes.html";
         }
@@ -178,8 +180,142 @@
             })
 
         }
-    </script>
+    </script> -->
 
+    <script>
+        function listarLivros() {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            let listaFavoritos = [];
+
+            if (idUsuario != undefined && idUsuario != null) {
+                fetch(`http://localhost:3333/favoritos/listar/${idUsuario}`)
+                    .then(function (resposta) {
+                        return resposta.json();
+                    })
+                    .then(function (favoritos) {
+                        listaFavoritos = favoritos;
+                        carregarLivros(listaFavoritos);
+                    });
+            } else {
+                carregarLivros(listaFavoritos);
+            }
+        }
+
+        function carregarLivros(listaFavoritos) {
+            fetch("http://localhost:3333/livros/listar")
+                .then(function (resposta) {
+                    return resposta.json();
+                })
+                .then(function (livros) {
+                    let container = '';
+
+                    for (let i = 0; i < livros.length; i++) {
+                        let livro = livros[i];
+                        let coracao = "./img/icon-coracao-vazio.png";
+                        let classeCoracao = "coracao-card";
+                        for (let j = 0; j < listaFavoritos.length; j++) {
+                            if (listaFavoritos[j].idLivro == livro.idLivro) {
+                                coracao = "./img/icon-coracao-cheio.png";
+                                classeCoracao = "coracao-card-2";
+                            }
+                        }
+
+                        container += `
+                        <div class="cards-biblioteca">
+                            <img src="./img/icon-fitinha.png" alt="" class="fitinha-cards">
+
+                            <div class="card-capa">
+                                <img src="./img/capa/${livro.imagem}" alt="">
+                            </div>
+
+                            <div class="card-conteudo" id="card_conteudo">
+                                <img 
+                                    src="${coracao}" 
+                                    alt="" 
+                                    class="${classeCoracao}"
+                                    id="coracao${livro.idLivro}" 
+                                    onclick="favoritar(${livro.idLivro})"
+                                >
+
+                                <span class="titulo-card">
+                                    ${livro.titulo}
+                                </span>
+
+                                <span class="autor-card">
+                                    ${livro.autor}
+                                </span>
+
+                                <img src="./img/icon-linha-cards.png" alt="" class="linha-card">
+
+                                <button onclick="RedirecionarDetalhes(${livro.idLivro})" class="btn-amostra">
+                                    Detalhes
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    }
+
+                    container_livros.innerHTML = container;
+                });
+        }
+        function Carregar() {
+            let id = sessionStorage.ID_USUARIO;
+
+            if (id == undefined || id == null) {
+                botoes_deslogado.style.display = "flex";
+            } else {
+                dash_btn.style.display = "flex";
+                btnSair.style.display = "flex";
+            }
+        }
+
+        function Sair() {
+            limparSessao();
+        }
+
+        function Redirecionar() {
+            window.location = "./cadastro.html";
+        }
+
+        function RedirecionarDetalhes(id) {
+            console.log(id);
+            sessionStorage.setItem("ID_LIVRO", id);
+            window.location = "./detalhes.html";
+        }
+
+        function favoritar(idLivro) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+
+            if (idUsuario == undefined || idUsuario == null) {
+                alert("Você precisa estar logado para favoritar um livro.");
+                window.location = "login.html";
+                return;
+            }
+
+            fetch("http://localhost:3333/favoritos/favoritar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    fkUsuario: idUsuario,
+                    fkLivro: idLivro
+                })
+            })
+                .then(function (resposta) {
+                    if (resposta.ok) {
+                        // alert("Livro Favoritado!!!!");
+
+                        let coracao = document.getElementById("coracao" + idLivro);
+
+                        coracao.src = "./img/icon-coracao-cheio.png";
+                        coracao.className = "coracao-card-2";
+                    } else {
+                        alert("Esse livro já está nos seus favoritos.");
+                    }
+                });
+        }   </script>
+    <!-- <img src="" alt="" width=""> -->
 </body>
 
 </html>

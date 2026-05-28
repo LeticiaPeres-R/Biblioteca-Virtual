@@ -186,6 +186,7 @@
                     flex-direction: column;
                     justify-content: space-between;
                     margin-top: 35px;
+                    /* position: relative; */
 
                     .texto-input {
                         margin-top: 25px;
@@ -219,18 +220,19 @@
                 }
 
                 .mensagem {
+                    /* position: absolute; */
                     width: 90%;
                     font-family: 'Libre Baskerville', serif;
                     font-size: 1rem;
                     color: #3E6335;
                     text-align: center;
-                    margin-top: 10px;
+                    margin-top: 25px;
                 }
 
                 .btn-entrar {
                     width: 90%;
                     height: 70px;
-                    margin-top: 75px;
+                    margin-top: 40px;
 
                     button {
                         position: relative;
@@ -245,6 +247,7 @@
                         color: #F5F1E8;
                         border-radius: 10px;
                         box-shadow: 0 4px 10px #2323233f;
+                        cursor: pointer;
 
                         img {
                             position: absolute;
@@ -275,7 +278,7 @@
                             margin: 0 10px;
                         }
 
-                        p {
+                        a {
                             color: #C9A96E;
                             font-size: 1rem;
                             font-family: 'Libre Baskerville', serif;
@@ -543,10 +546,20 @@
                     }
                 }
 
+                .mensagem-login {
+                    width: 90%;
+                    font-family: 'Libre Baskerville', serif;
+                    font-size: 1rem;
+                    color: #3E6335;
+                    text-align: center;
+                    margin-top: 30px;
+                }
+
                 .btn-entrar {
                     width: 90%;
                     height: 70px;
                     margin-top: 25px;
+                    cursor: pointer;
 
                     button {
                         position: relative;
@@ -561,6 +574,7 @@
                         color: #F5F1E8;
                         border-radius: 10px;
                         box-shadow: 0 4px 10px #2323233f;
+                        cursor: pointer;
 
                         img {
                             position: absolute;
@@ -592,7 +606,7 @@
                             margin: 0 10px;
                         }
 
-                        p {
+                        a {
                             color: #C9A96E;
                             font-size: 1rem;
                             font-family: 'Libre Baskerville', serif;
@@ -603,6 +617,7 @@
                         width: 50%;
                         height: 60px;
                         margin-top: 20px;
+                        cursor: pointer;
 
                         a {
                             width: 100%;
@@ -617,10 +632,10 @@
                             font-size: 1.2rem;
                             font-family: 'Libre Baskerville', serif;
                             padding-right: 25px;
+                            cursor: pointer;
 
                             img {
                                 width: 40px;
-                                /* margin-right: 10px; */
                             }
                         }
                     }
@@ -724,6 +739,76 @@
                 border-radius: 15px;
                 font-family: 'Libre Baskerville', serif;
             }
+        }
+    }
+}
+
+.modal-fundo {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: #00000080;
+    z-index: 5;
+    justify-content: center;
+    align-items: center;
+
+    .modal-card {
+        width: 370px;
+        height: 410px;
+        background-color: #F5F1E8;
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+        position: relative;
+
+        img {
+            width: 50px;
+        }
+
+        .img-sucesso {
+            img {
+                margin: 15px;
+                width: 130px;
+                margin-bottom: 20px;
+            }
+        }
+
+        .img-linha {
+            img {
+                position: absolute;
+                right: 60px;
+                top: 60px;
+                width: 250px;
+                height: auto;
+            }
+        }
+
+        h2 {
+            color: #3E6335;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+        }
+
+        p {
+            color: #3E6335;
+            font-family: 'Libre Baskerville', serif;
+            font-size: 0.90rem;
+            margin-top: 15px;
+            width: 70%;
+        }
+
+        button {
+            margin-top: 15px;
+            width: 60%;
+            height: 45px;
+            background-color: #758F6F;
+            color: #F3ECE4;
+            font-size: 1.1rem;
+            border-radius: 15px;
+            font-family: 'Libre Baskerville', serif;
         }
     }
 }

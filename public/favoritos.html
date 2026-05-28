@@ -15,7 +15,7 @@
 
 <body onload="listarFavoritos(), Carregar()">
     <div class="container">
-        <div class="container-principal">
+        <div class="container-principal" id="container_principal">
             <div class="nav-bar">
                 <div class="elemento-nav-1">
                     <img src="./img/pin1.png" alt="">
@@ -26,7 +26,7 @@
                     <a href="./biblioteca.html">Biblioteca</a>
                     <a href="./favoritos.html">Favoritos</a>
                     <a href="./index.html#id_banner">Sobre</a>
-                    <a href="./dashboard.html" id="dash_btn">Dashboard</a>
+                    <a href="./dashboard.html" id="dash_btn" style="display: none;">Dashboard</a>
                 </div>
                 <div class="elemento-nav-3">
                     <div style="display: none;" id="botoes_deslogado" class="botoes_deslogado">
@@ -49,20 +49,20 @@
                 <img src="./img/icon-porta.png" alt="" class="banner-biblioteca">
                 <span>Favoritos</span>
                 <img src="./img/icon-moldura-linha.png" alt="" class="linha-hero-biblioteca">
-                <p>Os livros que consquistaram o seu coração</p>
+                <p id="mensagem_logado">Os livros que consquistaram o seu coração</p>
                 <img src="./img/icon-borboleta-estrela.png" alt="" class="borboleta-hero-biblioteca">
                 <img src="./img/icon-flor-estrela.png" alt="" class="flor-hero-biblioteca">
                 <!-- Mensagem para usuário não logado -->
                 <div id="aviso_login" style="display: none;">
                     <p>
-                        Aqui você pode ver seus livros favoritos 💛<br>
-                        Você precisa estar logado para acessar essa funcionalidade.
+                        Você precisa estar logado para acessar seus favoritos.
                     </p>
                 </div>
             </div>
             <div id="container_livros" class="container-cards">
             </div>
-            <div class="footer">
+            <!-- <div id="container_favoritos"></div> -->
+            <div class="footer" id="id_footer">
                 <div class="container-texto-footer">
                     <p>Cada livro é um portal para um mundo que só a imaginação pode abrir</p>
                     <img src="./img/icon-linha-3.png" alt="" class="linha-footer">
@@ -96,70 +96,71 @@
         </div>
     </div>
 
-
-    <div id="container_favoritos"></div>
-
 </body>
 
 <script>
-
     function listarFavoritos() {
-        var idUsuario = sessionStorage.ID_USUARIO;
-        var container = document.getElementById("container_favoritos");
-        var aviso = document.getElementById("aviso_login");
+        let idUsuario = sessionStorage.ID_USUARIO
+        let aviso = document.getElementById("aviso_login")
+        let container = document.getElementById("container_livros")
 
-        container.innerHTML = "";
+        container.innerHTML = ""
 
         if (idUsuario == undefined || idUsuario == null) {
-            aviso.style.display = "block";
-            return;
+            aviso.style.display = "block"
+            mensagem_logado.style.display = "none"
+            // container_principal.style.height = "100vh"
+            // id_footer.style.marginBottom = "150px"
+            return
         }
 
-        aviso.style.display = "none";
+        aviso.style.display = "none"
 
         fetch(`http://localhost:3333/favoritos/listar/${idUsuario}`)
             .then(function (resposta) {
-                return resposta.json();
+                return resposta.json()
             })
             .then(function (livros) {
+                let cards = ""
 
                 if (livros.length == 0) {
-                    container.innerHTML = "<p>Você ainda não tem favoritos.</p>";
+                    cards = "<p>Você ainda não tem favoritos.</p>"
                 }
 
-                for (var i = 0; i < livros.length; i++) {
-                    var livro = livros[i];
+                for (let i = 0; i < livros.length; i++) {
+                    let livro = livros[i]
 
-                    container_livros.innerHTML += `        <div class="cards-biblioteca">
-            <img src="./img/icon-fitinha.png" alt="" class="fitinha-cards">
-            <div class="card-capa">
-                <img src="./img/capa/${livro.imagem}" alt="">
-            </div>
-            <div class="card-conteudo">
-                <button onclick="desfavoritar(${livro.idLivro})">
-                <img src="./img/icon-remover.png" alt=""  class="coracao-card">
-                </button>
-                <span class="titulo-card">
-                    ${livro.titulo}
-                </span>
-                <span class="autor-card">
-                    ${livro.autor}
-                </span>
-                <img src="./img/icon-linha-cards.png" alt="" class="linha-card">
-                <button onclick="CarregarPreview()" class="btn-amostra">
-                    <img src="./img/icon-pin3.png" alt="">
-                    Ler amostra
-                </button>
-            </div>
-        </div>
-                `
+                    cards += `
+                        <div class="cards-biblioteca">
+                            <img src="./img/icon-fitinha.png" alt="" class="fitinha-cards">
+
+                            <div class="card-capa">
+                                <img src="./img/capa/${livro.imagem}" alt="">
+                            </div>
+
+                            <div class="card-conteudo">
+                                <button onclick="desfavoritar(${livro.idLivro})">
+                                    <img src="./img/icon-remover.png" alt="" class="coracao-card">
+                                </button>
+
+                                <span class="titulo-card">${livro.titulo}</span>
+                                <span class="autor-card">${livro.autor}</span>
+
+                                <img src="./img/icon-linha-cards.png" alt="" class="linha-card">
+
+                                <button onclick="RedirecionarDetalhes(${livro.idLivro})" class="btn-amostra">
+                                    Detalhes
+                                </button>
+                            </div>
+                        </div>
+                    `;
                 }
-
+                // <img src="./img/icon-pin3.png" alt="">
+                container.innerHTML = cards;
             });
     }
     function desfavoritar(idLivro) {
-
-        var idUsuario = sessionStorage.ID_USUARIO;
+        let idUsuario = sessionStorage.ID_USUARIO;
 
         fetch("http://localhost:3333/favoritos/desfavoritar", {
             method: "DELETE",
@@ -173,29 +174,32 @@
         })
             .then(function (resposta) {
                 if (resposta.ok) {
-                    alert("Removido dos favoritos!");
-                    listarFavoritos(); // atualiza a lista
+                    // alert("Removido dos favoritos!");
+                    listarFavoritos();
                 } else {
                     alert("Erro ao remover");
                 }
             });
-
     }
     function Carregar() {
-        let id = sessionStorage.ID_USUARIO
+        let id = sessionStorage.ID_USUARIO;
+
         if (id == undefined || id == null) {
-            botoes_deslogado.style.display = "flex"
-        }
-        else {
-            btnSair.style.display = "flex"
-            dash_btn.style.display = "flex"
+            botoes_deslogado.style.display = "flex";
+        } else {
+            btnSair.style.display = "flex";
+            dash_btn.style.display = "flex";
         }
     }
     function Sair() {
-        limparSessao()
+        limparSessao();
     }
     function Redirecionar() {
-        window.location = "./cadastro.html"
+        window.location = "./cadastro.html";
+    }
+    function RedirecionarDetalhes(id) {
+        sessionStorage.setItem("ID_LIVRO", id);
+        window.location = "./detalhes.html";
     }
 </script>
 
