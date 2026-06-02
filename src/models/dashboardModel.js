@@ -13,7 +13,7 @@ function totalFavoritos(fkUsuario) {
 function porcentagemAcervo(fkUsuario) {
     let instrucao =
         `
-            SELECT ROUND((COUNT(*) / (SELECT COUNT(*) FROM livros)) * 100, 0) AS porcentagemAcervo, COUNT(*) AS totalFavoritos
+            SELECT COUNT(*) AS totalFavoritos
             FROM favoritos
             WHERE fkUsuario = ${fkUsuario};
         `
@@ -56,10 +56,10 @@ function generoMaisFavoritado() {
 function topCincoGeneros() {
     let instrucao =
         `
-            SELECT 
+            SELECT
                 livros.genero,
                 COUNT(favoritos.fkLivro) AS qtdFavoritos,
-                ROUND((COUNT(favoritos.fkLivro) / (SELECT COUNT(*) FROM favoritos)) * 100, 0) AS porcentagemGenero
+                (SELECT COUNT(*) FROM favoritos) AS totalFavoritos
             FROM favoritos
             JOIN livros ON favoritos.fkLivro = livros.idLivro
             GROUP BY livros.genero

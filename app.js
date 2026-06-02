@@ -2,9 +2,9 @@
 // ARQUIVO COMENTADO: app.js
 // Comentários adicionados para explicar a função de cada parte do código.
 // ============================================================
-// var ambiente_processo = 'producao';
+var ambiente_processo = 'producao';
 // Define ou altera um valor usado pelo programa.
-var ambiente_processo = 'desenvolvimento';
+// var ambiente_processo = 'desenvolvimento';
 
 // Define ou altera um valor usado pelo programa.
 var caminho_env = ambiente_processo === 'producao' ? '.env' : '.env.dev';
@@ -65,15 +65,10 @@ app.use("/dashboard", dashboardRouter)
 app.listen(PORTA_APP, function () {
 // Mostra uma mensagem no terminal ou no console para ajudar a testar e depurar.
     console.log(`
-// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
-    \n\n\n                                                                                                 
-// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
+// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.                                                                                              
     Servidor do seu site já está rodando! Acesse o caminho a seguir para visualizar .: http://${HOST_APP}:${PORTA_APP} :. \n\n
-// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
     Você está rodando sua aplicação em ambiente de .:${process.env.AMBIENTE_PROCESSO}:. \n\n
-// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
     \tSe .:desenvolvimento:. você está se conectando ao banco local. \n
-// Linha de código da lógica do sistema. Leia junto com as linhas próximas para entender o fluxo completo.
     \t\tPara alterar o ambiente, comente ou descomente as linhas 1 ou 2 no arquivo 'app.js'\n\n`);
 // Fecha o bloco de código iniciado anteriormente.
 });

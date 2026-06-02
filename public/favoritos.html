@@ -116,7 +116,7 @@
 
         aviso.style.display = "none"
 
-        fetch(`http://localhost:3333/favoritos/listar/${idUsuario}`)
+        fetch(`/favoritos/listar/${idUsuario}`)
             .then(function (resposta) {
                 return resposta.json()
             })
@@ -162,7 +162,7 @@
     function desfavoritar(idLivro) {
         let idUsuario = sessionStorage.ID_USUARIO;
 
-        fetch("http://localhost:3333/favoritos/desfavoritar", {
+        fetch("/favoritos/desfavoritar", {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"

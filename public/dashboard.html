@@ -136,7 +136,7 @@
     </div>
 
     <script>
-        const data = new Date();
+        // const data = new Date();
         console.log(data);
         function carregarDashboard() {
             let fkUsuario = sessionStorage.ID_USUARIO
@@ -170,8 +170,8 @@
                 })
                 .then(function (dados) {
                     let total = dados[0]
-                    console.log(total)
-                    total_acervo_porcentagem.innerHTML = `${total.porcentagemAcervo}%`
+                    let porcentagemAcervo = total.totalFavoritos * 100 / 18
+                    total_acervo_porcentagem.innerHTML = `${porcentagemAcervo.toFixed()}%`
                     subtitulo_acervo.innerHTML = `Você favoritou ${total.totalFavoritos} de 18 livros`
                 })
         }
@@ -286,8 +286,10 @@
                 .then(function (dados) {
                     console.log(dados)
                     for (let i = 0; i < dados.length; i++) {
-                        genero.push(`${dados[i].genero} - ${dados[i].porcentagemGenero}%`)
-                        porcentagemGenero.push(dados[i].porcentagemGenero)
+                        let dadosAtual = dados[i]
+                        let porcentagemAcervo = dadosAtual.qtdFavoritos / dadosAtual.totalFavoritos * 100
+                        genero.push(`${dadosAtual.genero} - ${porcentagemAcervo.toFixed()}%`)
+                        porcentagemGenero.push(porcentagemAcervo.toFixed())
                     }
 
                     let grafDonut = document.getElementById('graf_donut')

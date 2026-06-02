@@ -188,7 +188,7 @@
             let listaFavoritos = [];
 
             if (idUsuario != undefined && idUsuario != null) {
-                fetch(`http://localhost:3333/favoritos/listar/${idUsuario}`)
+                fetch(`/favoritos/listar/${idUsuario}`)
                     .then(function (resposta) {
                         return resposta.json();
                     })
@@ -202,7 +202,7 @@
         }
 
         function carregarLivros(listaFavoritos) {
-            fetch("http://localhost:3333/livros/listar")
+            fetch("/livros/listar")
                 .then(function (resposta) {
                     return resposta.json();
                 })
@@ -278,7 +278,7 @@
         }
 
         function RedirecionarDetalhes(id) {
-            console.log(id);
+            console.log(id)
             sessionStorage.setItem("ID_LIVRO", id);
             window.location = "./detalhes.html";
         }
@@ -292,7 +292,7 @@
                 return;
             }
 
-            fetch("http://localhost:3333/favoritos/favoritar", {
+            fetch("/favoritos/favoritar", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

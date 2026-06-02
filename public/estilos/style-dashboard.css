@@ -20,8 +20,8 @@ img {
     justify-content: center;
     align-items: center;
 
-    /* padding-top: 5vh;
-    padding-bottom: 5vh; */
+    padding-top: 5vh;
+    padding-bottom: 5vh;
 
     .container-principal {
         width: 95%;
@@ -178,7 +178,7 @@ img {
     .flor-menu {
         width: 200px;
         position: absolute;
-        top: 825px;
+        top: 815px;
         left: -5px;
 
     }

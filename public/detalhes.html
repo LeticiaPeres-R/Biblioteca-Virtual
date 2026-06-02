@@ -165,12 +165,12 @@
             window.location = "./cadastro.html"
         }
         function CarregarDetalhes() {
-            fetch(`http://localhost:3333/livros/detalhar/${idLivro}`, {
+            fetch(`/livros/detalhar/${idLivro}`, {
                 method: "GET"
             }).then(function (resposta) {
                 if (resposta.ok) {
                     resposta.json().then(function (livro) {
-                        console.log(livro);
+                        console.log(livro)
                         id_titulo.innerHTML = livro.tituloCurto
                         id_autor.innerHTML = livro.autor
                         id_autor_2.innerHTML = livro.autor
