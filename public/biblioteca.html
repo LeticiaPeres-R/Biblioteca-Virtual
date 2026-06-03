@@ -200,7 +200,6 @@
                 carregarLivros(listaFavoritos);
             }
         }
-
         function carregarLivros(listaFavoritos) {
             fetch("/livros/listar")
                 .then(function (resposta) {
@@ -268,21 +267,17 @@
                 btnSair.style.display = "flex";
             }
         }
-
         function Sair() {
             limparSessao();
         }
-
         function Redirecionar() {
             window.location = "./cadastro.html";
         }
-
         function RedirecionarDetalhes(id) {
             console.log(id)
             sessionStorage.setItem("ID_LIVRO", id);
             window.location = "./detalhes.html";
         }
-
         function favoritar(idLivro) {
             let idUsuario = sessionStorage.ID_USUARIO;
 
@@ -314,7 +309,8 @@
                         alert("Esse livro já está nos seus favoritos.");
                     }
                 });
-        }   </script>
+        }
+    </script>
     <!-- <img src="" alt="" width=""> -->
 </body>
 

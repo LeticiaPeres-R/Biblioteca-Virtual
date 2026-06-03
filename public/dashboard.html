@@ -195,11 +195,10 @@
                 })
                 .then(function (dados) {
                     let total = dados[0]
+                    let porcentagemGenero = total.qtdFavoritos / total.totalFavoritos * 100
                     console.log(total)
                     total_genero.innerHTML = `${total.genero}`
-                    if (total.porcentagemGenero != undefined) {
-                        subtitulo_genero.innerHTML = `${total.porcentagemGenero}% dos favoritos`
-                    }
+                    subtitulo_genero.innerHTML = `${porcentagemGenero.toFixed()}% dos favoritos`
                 })
         }
         function topCincoLivros() {

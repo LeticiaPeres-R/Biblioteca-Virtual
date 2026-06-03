@@ -40,15 +40,15 @@ function livroMaisFavoritado() {
 function generoMaisFavoritado() {
     let instrucao =
         `
-            SELECT 
-                livros.genero,
-                COUNT(favoritos.fkLivro) AS qtdFavoritos,
-                ROUND((COUNT(favoritos.fkLivro) / (SELECT COUNT(*) FROM favoritos)) * 100, 0) AS porcentagemGenero
-            FROM favoritos
-            JOIN livros ON favoritos.fkLivro = livros.idLivro
-            GROUP BY livros.genero
-            ORDER BY qtdFavoritos DESC
+            SELECT livros.genero, 
+            COUNT(favoritos.fkLivro) AS qtdFavoritos, 
+            (SELECT COUNT(*) FROM favoritos) AS totalFavoritos 
+            FROM favoritos 
+            JOIN livros ON favoritos.fkLivro = livros.idLivro 
+            GROUP BY livros.genero 
+            ORDER BY qtdFavoritos DESC 
             LIMIT 1;
+                
         `
     console.log("Executando a instrução SQL: \n" + instrucao)
     return database.executar(instrucao)
